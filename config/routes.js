@@ -36,6 +36,9 @@ module.exports.routes = {
     controller: 'home',
     action: 'index'
   },
+  'get /login': "UserController.login",
+  'post /login': 'UserController.process',
+  'get /logout': 'UserController.logout',
 
   /*
   // But what if you want your home page to display

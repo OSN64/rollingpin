@@ -1,7 +1,7 @@
 {
     "name": "rollingpin",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.3.0",
     "description": "a Sails application",
     "dependencies": {
         "sails": "0.9.17",
@@ -9,7 +9,9 @@
         "sails-disk": "~0.9.0",
         "ejs": "0.8.4",
         "optimist": "0.3.4",
-        "handlebars": "2.0.0"
+        "handlebars": "2.0.0",
+        "bcrypt": "0.8.0",
+        "sails-memory":"0.9.x"
     },
     "scripts": {
         "start": "node app.js",

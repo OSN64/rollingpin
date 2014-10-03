@@ -17,11 +17,22 @@
 
  module.exports = {
  	index: function(req, res) {
- 		res.view({
+ 		var name = false;
+ 		if (req.session.authenticated) {
+ 			console.log("user id: " + req.session.user);
+ 			User.findOneById(req.session.user).done(function (err, user) {
+	      		if (err) name = false;
+	      		else name = user.email;
+ 			})
+ 		};
+
+ 		res.view("home/index",{
  			partials: {
  				head: '../partials/head',
  				tail: '../partials/tail',
  			},
+ 			title:"Home",
+ 			username: name
  		});
  	},
 
