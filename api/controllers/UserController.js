@@ -15,72 +15,104 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-module.exports = {
-	login: function(req,res){
-	    res.view({
+ module.exports = {
+ 	registration: function(req,res){
+ 		res.view("user/registration",{
  			partials: {
  				head: '../partials/head',
  				tail: '../partials/tail',
  			},
- 		title:"Login"
+ 			title:"Registration"
  		});
-	  },
-// if (err) res.redirect('/login');
-    process: function (req, res) {
-	    var bcrypt = require('bcrypt');
+ 	},
+ 	login: function(req,res){
+ 		res.view("user/login",{
+ 			partials: {
+ 				head: '../partials/head',
+ 				tail: '../partials/tail',
+ 			},
+ 			title:"Login"
+ 		});
+ 	},
+ 	process: function (req, res) {
+ 		var bcrypt = require('bcrypt');
 
-	    User.findOneByEmail(req.body.email).done(function (err, user) {
-	      if (err) res.json({ error: 'DB error' }, 500);
+ 		User.findOneByEmail(req.body.email).done(function (err, user) {
+ 			if (err) {
+ 				req.session.flash = {err: { AuthenticationError: { server: 'DB Error'} }}
+				return res.redirect('/login');
+ 			}
 
-	      if (user) {
-	        bcrypt.compare(req.body.password, user.password, function (err, match) {
-	          if (err) res.json({ error: 'Server error' }, 500);
+ 			if (user) {
+ 				bcrypt.compare(req.body.password, user.password, function (err, match) {
+ 					if (err) {
+ 						req.session.flash = {err: { AuthenticationError: { server: 'Server error'} }}
+						return res.redirect('/login');
+ 					}
 
-	          if (match) {
-	            // password match
-	            req.session.user = user.id;
-	            req.session.authenticated = true;
-	            res.json(user);
-	          } else {
-	            // invalid password
-	            if (req.session.user) req.session.user = null;
-	            res.json({ error: 'Invalid password' }, 400);
-	          }
-	        });
-	      } else {
-	        res.json({ error: 'User not found' }, 404);
-	      }
-	    });
-  },
-  logout: function(req, res) {
-    req.session.user = null;
-    req.session.authenticated = false;
-    res.redirect("/");
-  },
-  create : function  (req, res) {
-		var Model = User;
+ 					if (match) {
+ 						// update online user
+ 						User.update({id: user.id},{online: true}).exec(function afterwards(err,updated){});
+ 						user.online = true;
+			            // password match
+						delete user.password; //delete the user password to return the user object
+						
+						req.session.user = user;
+						req.session.authenticated = true;
+						return res.redirect('/');
+					} else {
+			            // invalid password
+			            req.session.user = null;
+			            req.session.flash = {err: { AuthenticationError: { password: 'Invalid password'} }}
+						return res.redirect('/login');
+			        }
+			    });
+ 			} else {
+				req.session.flash = {err: { AuthenticationError: { name: 'User not found'} }}
+				return res.redirect('/login');
+ 			}
+ 		});
+ 	},
+ 	logout: function(req, res) {
+ 		if (req.session.user) {
+ 			User.update({id: req.session.user.id},{online: false}).exec(function afterwards(err,updated){});
+ 		};
+ 		req.session.user = null;
+ 		req.session.authenticated = false;
+ 		res.redirect("/");
+ 	},
+ 	create : function  (req, res) {
+ 		var Model = User;
 		// // Create monolithic parameter object
 		var params = req.params.all();
+		// console.log(params);
 		// 		// Create user using params
+		params['online'] = true;
 		User.create(params, function(err, user) {
 			
-		// 	// TODO: differentiate between waterline-originated validation errors
-		// 	//			and serious underlying issues
-		// 	// TODO: Respond with badRequest if an error is encountered, w/ validation info
-			if (err) return res.serverError(err);
-
+			// 	// TODO: differentiate between waterline-originated validation errors
+			// 	//			and serious underlying issues
+			// 	// TODO: Respond with badRequest if an error is encountered, w/ validation info
+			if (err) {
+				// return res.serverError(err);
+				req.session.flash = {
+					err: err
+				}
+				return res.redirect('/register');
+			}
 			res.status(201);
-			console.log("user: " + user.email +" just loged in")
-			// return res.json(user);
-			req.session.user = user.id;
-	        req.session.authenticated = true;
+			delete user.password; //delete the user password to return the user object
+			console.log(user);
+
+			req.session.user = user;
+			req.session.authenticated = true;
 			return res.view("home/index",{
-		 			partials: {
-		 				head: '../partials/head',
-		 				tail: '../partials/tail',
-		 			},
-		 				username: user.email
-		 			});
+				partials: {
+					head: '../partials/head',
+					tail: '../partials/tail',
+				},
+				username: user.email
+			});
 
 		});
 		
@@ -90,7 +122,7 @@ module.exports = {
    * Overrides for the settings in `config/controllers.js`
    * (specific to UserController)
    */
-  _config: {}
+   _config: {}
 
-  
+   
 };

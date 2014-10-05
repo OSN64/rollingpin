@@ -11,7 +11,8 @@
         "optimist": "0.3.4",
         "handlebars": "2.0.0",
         "bcrypt": "0.8.0",
-        "sails-memory":"0.9.x"
+        "sails-memory":"0.9.x",
+        "sails-mongo": "~0.9.4"
     },
     "scripts": {
         "start": "node app.js",

@@ -18,13 +18,8 @@
  module.exports = {
  	index: function(req, res) {
  		var name = false;
- 		if (req.session.authenticated) {
- 			console.log("user id: " + req.session.user);
- 			User.findOneById(req.session.user).done(function (err, user) {
-	      		if (err) name = false;
-	      		else name = user.email;
- 			})
- 		};
+ 		if (req.session.authenticated) name = req.session.user.email
+ 		else name = false;
 
  		res.view("home/index",{
  			partials: {

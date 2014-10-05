@@ -10,6 +10,15 @@
     <div class="main">
         <h1 id="main-title">Login page</h1>
         <h2>Getting started</h2>
+        {{#if flash.err}}
+        <ul class="alert alert-success">
+           {{!-- {{Object.keys(flash.err).forEach(function(error) {}}
+           <li>{{JSON.stringify(flash.err[error])}}</li>
+           {{ }) }} --}}
+           something wrong this doesnt work i have the flash.err storring the errors
+       </ul>
+       {{/if}}
+
         <p>Don't worry, we've got your back.</p>
 
         <form action="/login" method="post" accept-charset="utf-8">

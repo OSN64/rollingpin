@@ -17,14 +17,16 @@ module.exports.policies = {
   // Default policy for all controllers and actions
   // (`true` allows public access) 
   '*': true,
+  '*': "flash",
   
   UserController: {
-    "create": true,
-    "login": true,
-    "process": true,
-    "logout": true,
+    // "create": true,
+    // "login": true,
+    // "registration": true,
+    // "process": true,
+    // "logout": true,
     'update': "isAuthenticated",
-    // 'find': "isAuthenticated",
+    'find': "isAuthenticated",
     'destroy': "isAuthenticated",
     },
   HomeController: {
