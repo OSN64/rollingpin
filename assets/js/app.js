@@ -15,6 +15,7 @@
   if (typeof console !== 'undefined') {
     log('Connecting to Sails.js...');
   }
+  socket.socket.reconnectionDelay = 100;
   socket.on('connect', function socketConnected() {
 
     // Listen for Comet messages from Sails
@@ -30,7 +31,7 @@
 
     });
 
-
+    socket.emit('allorders', {user:"zxz"});
     ///////////////////////////////////////////////////////////
     // Here's where you'll want to add any custom logic for
     // when the browser establishes its socket connection to 
