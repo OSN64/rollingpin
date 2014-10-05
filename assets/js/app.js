@@ -15,7 +15,6 @@
   if (typeof console !== 'undefined') {
     log('Connecting to Sails.js...');
   }
-
   socket.on('connect', function socketConnected() {
 
     // Listen for Comet messages from Sails

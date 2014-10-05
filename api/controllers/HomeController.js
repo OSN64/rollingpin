@@ -29,6 +29,7 @@
  			title:"Home",
  			username: name
  		});
+		// res.json({name: "dave" , person: 3});
  	},
 
   /**
