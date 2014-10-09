@@ -11,12 +11,17 @@
 module.exports.bootstrap = function (cb) {
 
 	//set seed values here
-	// Menuitem.destroy().exec();
-	// Counter.destroy().exec();
-	// User.destroy().exec();
-	// Orderitem.destroy().exec();
-	// Order.destroy().exec();
-	// Counter.create({amount:'0', model_name:'Menuitem'}).exec();
+	// Menuitem.destroy().exec(console.log);
+	// Counter.destroy().exec(console.log);
+	// User.destroy().exec(console.log);
+	// Orderitem.destroy().exec(console.log);
+	// Order.destroy().exec(console.log);
+	// Customer.destroy().exec(console.log);
+	// Counter.create({amount:'0', model_name:'Menuitem'}).exec(console.log);
+	// Counter.create({amount:'0', model_name:'User'}).exec(console.log);
+	// Counter.create({amount:'0', model_name:'Orderitem'}).exec(console.log);
+	// Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
+	// Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
 
 
 
