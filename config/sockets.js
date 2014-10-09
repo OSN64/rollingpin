@@ -19,8 +19,10 @@ module.exports.sockets = {
     // By default: do nothing
     // This is a good place to subscribe a new socket to a room, inform other users that
     // someone new has come online, or any other custom socket.io logic
-    
-
+    // console.log(session)
+    if (session.user != null) {
+      sails.sockets.blast("message",{msg:"User:"+ session.user.name + " just connected"});
+    };
     //this is intresting the sessions get shared on both express and socket.ip
     // console.log(session);
     socket.on('allorders', function(data) {

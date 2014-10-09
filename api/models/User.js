@@ -16,8 +16,8 @@
  		},
  		email: {
  			type: 'string',
- 			unique: true,
- 			required: true
+ 			unique: true, 			
+      required: true
  		},
  		password: {
  			type: 'string',

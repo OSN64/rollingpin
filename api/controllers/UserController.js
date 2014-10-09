@@ -99,8 +99,8 @@
 					err: err
 				}
 				return res.redirect('/register');
-			}
-			res.status(201);
+			
+}			res.status(201);
 			delete user.password; //delete the user password to return the user object
 			console.log(user);
 

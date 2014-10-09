@@ -1,5 +1,5 @@
 /**
-* Order.js
+* Orderitem.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -8,19 +8,17 @@
 module.exports = {
 
 	attributes: {
-		customerid : {
-			type: "integer",
-			required: true
+		menuItemid : {
+			type : "string",
+			required : true,
 		},
-		pricesum : {
+		quantity : {
 			type: "integer",
+			required: true,
 		},
-		method: {
-			type: 'string',
-			enum: ['take-away', 'home-delivery']
+		orderid:{
+			type: "integer",
+			required:true,
 		}
-
-  	// function to calculate the sum of the price
-  },
-
+	}
 };

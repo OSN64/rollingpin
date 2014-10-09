@@ -26,7 +26,7 @@
       // to run when a new message arrives from the Sails.js
       // server.
       ///////////////////////////////////////////////////////////
-      log('New comet message received :: ', message);
+      log('New comet message received :: ', message.msg);
       //////////////////////////////////////////////////////
 
     });
