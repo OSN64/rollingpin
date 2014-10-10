@@ -1,4 +1,11 @@
 {{> head}}
+<style>
+    p {
+
+    }
+</style>
+
+
 <!-- Default home page -->
 <div class="top-bar">
     <div class="container clearfix">
@@ -8,31 +15,59 @@
 
 <div class="container clearfix">
     <div class="main">
-        <h1 id="main-title">
-        {{order.id}}
-            <div class="steps">
-                <h2>Order</h2>
-                <button>Submit order</button>
-                {{!-- maybe have a javascript popup showing yconfirm or nah --}}
-                <ul>
-                    <li><p>item name</p><p>quantity</p><p>$100</p> <button>X</button></li>
-                    <li><p>item name</p><p>quantity</p><p>$100</p> <button>X</button></li>
-                    <li><p>item name</p><p>quantity</p><p>$100</p> <button>X</button></li>
-                </ul>
-            </div>
+        <h1 id="main-title"></h1>
+        
+        <div class="steps">
+            <h2>Order</h2>
+            <button>Submit order</button>
+            <ul>
+                <li><p id="name">item name</p><p>quantity</p><p>$100</p> <button>X</button></li>
+                <hr>
+                <li><p id="name">item name</p><p>quantity</p><p>$100</p> <button>X</button></li>
+                <hr>
+                <li><p id="name">item name</p><p>quantity</p><p>$100</p> <button>X</button></li>
+            </ul>
 
-        </div>
-        <div class="side-bar">
-            <form action="" method="" accept-charset="utf-8">
-                <label>Item: </label>
-                <select name="item">
-                    {{!-- have a web socket request that gets all the item an loads it into these options   --}}
-                    <option value="itemid2332">Coconuts</option>
+
+            <form id="zxz" action="zxz" method="post" accept-charset="utf-8">
+
+                <label>zxz</label>
+                <select name="zxz">
+                    <option value="take-away">zxz-away</option>
+                    <option value="home-delivery">zxz-delivery</option>
                 </select>
-                <label>#</label>
-                <input type="number" name="quantity" value="0">
-                <input type="submit" name="submit" value="add">
+                <input type="text" name="zxz" placeholder="eg 23 zxz">
             </form>
         </div>
+
     </div>
-    {{> tail}}
+
+    <div class="side-bar">
+        <form accept-charset="utf-8">
+            {{order.id}}
+
+            <label>Item: </label>
+            <select name="item">
+                {{!-- have a web socket request that gets all the item an loads it into these options   --}}
+                <option value="itemid2332">Coconuts</option>
+            </select>
+            <label>#</label>
+            <input type="number" name="quantity" value="0">
+            <input type="submit" name="submit" value="add">
+        </form>
+
+        {{#if menuitems}}
+        <h3>Menu Items</h3>
+            {{!-- {{#listarr }}
+            {{name}}
+            {{/listarr}} --}}
+            {{#each menueitems}}
+                {{array.length}}
+            {{/each}}
+        {{else}}
+        <h3>No Menu Items</h3>
+        {{/if}}
+
+    </div>
+</div>
+{{> tail}}
