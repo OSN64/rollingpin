@@ -1,91 +1,50 @@
 {{> head}}
-<!-- Default home page -->
+<div class="main">
 
-<div class="container clearfix">
-    <div class="main">
-        <h1 id="main-title">
-            {{#if username}}
-            Welcome employee {{username}}
-            {{else}}
-            Welcome Guest
-            {{/if}}</h1>
-            {{#if username}}
-            <a href="/logout" title="login">Click to logout</a>
-            {{else}}
-            <a href="/login" title="login">Click to login</a>
-            <br>
-            <a href="/register" title="login">Or  Register</a>
-            {{/if}}
+    <p>Enter the customer's phone number to locate their customer profile.</p>
 
-            {{#if flash.err}}
-            <ul class="alert alert-success">
-                {{#list flash.err}}
-                    is {{rule}}
-                {{/list}}
-            </ul>
-            {{/if}}
+    {{#if flash.err}}
+    <ul class="alert alert-success">
+        {{#list flash.err}}
+            is {{rule}}
+        {{/list}}
+    </ul>
+    <hr>
+    {{/if}}
 
-            <hr>
-            <div class="steps">
-                <form id="phoneenter" accept-charset="utf-8">
-                    <label>Phone Number:</label>
-                    <input type="text" name="phno" placeholder="eg 21121211212"
-                    value="{{#if phno}}{{phno}}{{/if}}">
-                    <input type="submit" name="submit" value="enter">
-                </form>
-                {{!-- find phone no if not exist change page to register user --}}
-                {{!-- window.location.href = "/customer/register"; --}}
-                
-                {{!-- if exist store cusid  --}}
-                <form id="formordermeth" action="/order/create" method="post" accept-charset="utf-8">
-                    {{!-- javascript putt this after getting cusid --}}
-                    <input type="hidden" name="customerid" value="">
+    <div class="steps">
 
-                    <label>Order Method</label>
-                    <select name="method">
-                        <option value="take-away">take-away</option>
-                        <option value="home-delivery">home-delivery</option>
-                    </select>
-                    <input type="text" name="deliveryaddr" placeholder="eg 23 road">
-                    <input type="submit" name="submit" value="Order Now">
-                </form>
-                <button id="historybutt">Order History</button>
-                {{!-- for order history send a web socket to /order?cusid --}}
-
-
+        <form id="phoneenter" accept-charset="utf-8">
+            <div class="input-group">
+                <span class="input-group-addon">Phone #</span>
+                <input type="text" name="phno" class="form-control" placeholder="eg 5517 9000" value="{{#if phno}}{{phno}}{{/if}}">
             </div>
 
-        </div>
-        <div class="side-bar">
-            <h4 id="new">
-                New to Sails?
-            </h4>
-            <ul>
-                <li>
-                    <a href="http://sailsjs.org">Visit sailsjs.org</a>
-                </li>
-                <li>
-                    <a href="http://sailsjs.org/#!documentation">Documentation</a>
-                </li>
-            </ul>
-            <h4>
-                Next Steps
-            </h4>
-            <ul>
-                <li class="sprite single_page">
-                    <a target="_blank" href="http://sailsjs.org">Build a single page app</a>
-                </li>
-                <li class="sprite traditional">
-                    <a target="_blank" href="http://sailsjs.org">Build a traditional webapp</a>
-                </li>
-                <li class="sprite realtime">
-                    <a target="_blank" href="http://sailsjs.org">Build a realtime app</a>
-                </li>
-                <li class="sprite api">
-                    <a target="_blank" href="http://sailsjs.org">Build an API</a>
-                </li>
-            </ul>
-        </div>
+            <input type="submit" name="submit" value="Search">
+        </form>
+
+        {{!-- find phone no if not exist change page to register user --}}
+        {{!-- window.location.href = "/customer/register"; --}}
+
+        {{!-- if exist store cusid  --}}
+        <form id="formordermeth" action="/order/create" method="post" accept-charset="utf-8">
+            {{!-- javascript putt this after getting cusid --}}
+            <input type="hidden" name="customerid" value="">
+
+            <label>Order Method</label>
+            <select name="method">
+                <option value="take-away">take-away</option>
+                <option value="home-delivery">home-delivery</option>
+            </select>
+            <input type="text" name="deliveryaddr" placeholder="eg 23 road">
+            <input type="submit" name="submit" value="Order Now">
+        </form>
+        <button id="historybutt">Order History</button>
+        {{!-- for order history send a web socket to /order?cusid --}}
+
+
     </div>
-    <script type="text/javascript" src="/js/befOrder.js"></script>
-    {{> tail}}
+</div> <!-- /.main -->
+
+<script type="text/javascript" src="/js/newOrder.js"></script>
+{{> tail}}

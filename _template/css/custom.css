@@ -45,9 +45,9 @@ a {
     position: absolute;
     right: 0;
     top: 0;
-    background-image:url('http://lorempixel.com/1024/760/food/5/');
-    background-size:cover;
-    background-attachment:fixed;
+    background-image: url('/images/bg-food.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .divider {
