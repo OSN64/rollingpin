@@ -40,7 +40,7 @@
 
 
 	Handlebars.registerHelper('listerr', function(context, options) {
-		var ret = "<ul>";
+		var ret = "";
 
 		Object.keys(context).forEach(function(error){
 			// console.log(error)
@@ -49,7 +49,7 @@
 				ret = ret + "<li>" + error + options.fn(context[error][i]) + "</li>";
 			}
 		})
-		return ret + "</ul>";
+		return ret ;
 	});
 	// Handlebars.registerHelper('listarr', function(context, options) {
 	// 	console.log(context[i])

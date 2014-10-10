@@ -63,12 +63,12 @@
 					} else {
 			            // invalid password
 			            req.session.user = null;
-			            req.session.flash = {err: { AuthenticationError: { password: 'Invalid password'} }}
+			            req.session.flash = {err: {Password: [ {data: "not valid"} ] }}
 			            return res.redirect('/login');
 			        }
 			    });
  			} else {
- 				req.session.flash = {err: { AuthenticationError: { name: 'User not found'} }}
+ 				req.session.flash = {err: {Email: [ {data: "not found"} ] }}
  				return res.redirect('/login');
  			}
  		});

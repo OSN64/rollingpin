@@ -25,13 +25,13 @@
 
     {{!-- zxz this is where the page gets split into 2 --}}
     <div class="side-bar">
-        <form accept-charset="utf-8">
-            <input type="hidden" name="orderid" value="{{order.id}}">
+        <form id="addItem" accept-charset="utf-8">
+            <input type="hidden" name="orderid" value="{{order.id}}" required>
             <label>Item: </label>
-            <input type="number" name="menuItemid" placeholder="#">
+            <input type="number" name="menuItemid" placeholder="#" required>
             <label>Quantity:</label>
-            <input type="number" name="quantity" value="0">
-            <input type="submit" name="submit" value="add">
+            <input type="number" name="quantity" placeholder="3" required>
+            <input type="submit" name="submit" value="add" >
         </form>
 
         {{#if menuitems}}        
@@ -64,4 +64,5 @@
 
     </div>
 </div>
+<script type="text/javascript" src="/js/order.js"></script>
 {{> tail}}
