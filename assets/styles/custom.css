@@ -4,18 +4,18 @@
 
 /* custom template */
 html, body {
-   height: 100%;
-   font-family:'Open Sans',arial,sans-serif;
+    height: 100%;
+    font-family:'Open Sans',arial,sans-serif;
 }
 
 a {
-  color:#222222;
+    color:#222222;
 }
 
 .wrapper, .row {
-   height: 100%;
-   margin-left:0;
-   margin-right:0;
+    height: 100%;
+    margin-left:0;
+    margin-right:0;
 }
 
 .wrapper:before, .wrapper:after,
@@ -45,22 +45,22 @@ a {
     position: absolute;
     right: 0;
     top: 0;
-    background-image:url('http://lorempixel.com/1024/760/food/5/');
-    background-size:cover;
-    background-attachment:fixed;
+    background-image: url('/images/bg-food.jpg');
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .divider {
-	margin-top:32px;
+    margin-top:32px;
 }
 
 #main {
     background-color:#fefefe;
 }
 #main .img-circle {
-  margin-top:18px;
-  height:70px;
-  width:70px;
+    margin-top:18px;
+    height:70px;
+    width:70px;
 }
 
 .nav > li:hover {
@@ -75,24 +75,26 @@ a {
 	text-shadow:1px 0 1px #888888;
 }
 #sidebar a.logo {
-  display:block;
-  padding:3px;
-  background-color:#fff;
-  color:#777777;
-  height:40px;
-  width:90%;
-  margin:15px;
-  font-size:26px;
-  font-weight:700;
-  text-align:center;
-  text-decoration:none;
-  text-shadow:0 0 0;
+    display:block;
+    padding:3px;
+    background-color:#fff;
+    color:#777777;
+    height:40px;
+    width:90%;
+    margin:15px;
+    font-size:26px;
+    font-weight:700;
+    text-align:center;
+    text-decoration:none;
+    text-shadow:0 0 0;
+    border-radius: 8px;
 }
 #sidebar-footer {
-  position:absolute;bottom:5px;
+    position:absolute;
+    bottom:5px;
 }
 #footer {
-  margin-bottom:20px;
+    margin-bottom:20px;
 }
 
 /* center and adjust the sidebar contents on smaller devices */
@@ -115,25 +117,29 @@ a {
 
 
 /* bootstrap overrides */
+label {
+    margin: 5px;
+}
+
 
 h1,h2,h3 {
-   font-weight:800;
-   font-family:'Open Sans',arial,sans-serif;
+    font-weight:800;
+    font-family:'Open Sans',arial,sans-serif;
 }
 
 .jumbotron {
-  background-color:transparent;
+    background-color:transparent;
 }
 .label-default {
-  background-color:#dddddd;
+    background-color:#dddddd;
 }
 .page-header {
-  margin-top: 55px;
-  padding-top: 9px;
-  border-top:1px solid #eeeeee;
-  font-weight:700;
-  text-transform:uppercase;
-  letter-spacing:2px;
+    margin-top: 55px;
+    padding-top: 9px;
+    border-top:1px solid #eeeeee;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:2px;
 }
 
 .col-sm-9.full {
@@ -141,6 +147,5 @@ h1,h2,h3 {
 }
 
 small.text-muted {
-  font-family:courier,courier-new,monospace;
+    font-family:courier,courier-new,monospace;
 }
-
