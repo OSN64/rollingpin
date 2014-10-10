@@ -51,37 +51,37 @@
 		})
 		return ret + "</ul>";
 	});
-	Handlebars.registerHelper('listarr', function(context, options) {
-		console.log(context[i])
+	// Handlebars.registerHelper('listarr', function(context, options) {
+	// 	console.log(context[i])
 
-		var ret = "<ul>";
-		for (var i = 0; i < context.length; i++) {
-			console.log(context[i])
-		}
-		// Object.keys(context).forEach(function(error){
-		// 	// console.log(error)
-		// 	for(var i=0, j=context[error].length; i<j; i++) {
-		// 		// console.log(error.length)
-		// 		ret = ret + "<li>"  + options.fn(context[error][i]) + "</li>";
-		// 	}
-		// })
-
-			return ret + "</ul>";
-		});
-
-
-	// Handlebars.registerHelper('each', function(context, options) {
-	// 	var ret = "";
-		
-	// 	console.log("zxz")
-	// 	// console.log(options.fn(context[0]))
-		
-	// 	for(var i=0, j=context.length; i<j; i++) {
-	// 		ret = ret + options.fn(context[i]);
+	// 	var ret = "<ul>";
+	// 	for (var i = 0; i < context.length; i++) {
+	// 		console.log(context[i])
 	// 	}
+	// 	// Object.keys(context).forEach(function(error){
+	// 	// 	// console.log(error)
+	// 	// 	for(var i=0, j=context[error].length; i<j; i++) {
+	// 	// 		// console.log(error.length)
+	// 	// 		ret = ret + "<li>"  + options.fn(context[error][i]) + "</li>";
+	// 	// 	}
+	// 	// })
 
-	// 	return ret;
-	// });
+	// 		return ret + "</ul>";
+	// 	});
+
+
+	Handlebars.registerHelper('each', function(context, options) {
+		var ret = "";
+		
+		// console.log(context)
+		// console.log(options.fn(context[0]))
+		
+		for(var i=0, j=context.length; i<j; i++) {
+			ret = ret + options.fn(context[i]);
+		}
+
+		return ret;
+	});
 
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
