@@ -16,31 +16,33 @@
  		},
  		email: {
  			type: 'string',
- 			unique: true,
- 			required: true
- 		},
- 		password: {
- 			type: 'string',
- 			required: true,
- 			minLength: 6
- 		},
- 		admin: {
- 			type: 'boolean',
- 			defaultsTo: false
- 		},
- 		online: {
- 			type: 'boolean',
- 			defaultsTo: false
- 		},
+ 			unique: true, 			
+      required: true
+    },
+    password: {
+      type: 'string',
+      required: true,
+    },
+    admin: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    online: {
+      type: 'boolean',
+      defaultsTo: false
+    },
 
- 	},
+  },
 
- 	beforeCreate: function (attrs, next) {
- 		var bcrypt = require('bcrypt');
+  beforeCreate: function (attrs, next) {
+   var bcrypt = require('bcrypt');
 
         // This checks to make sure the password and password confirmation match before creating record
         if (!attrs.password || attrs.password != attrs.pasConfirmation) {
-        	return next({err: ["Password doesn't match password confirmation."]});
+          // return next({err: ["Password doesn't match password confirmation."]});
+          return next(
+            { ValidationError: {password: [ {data: "doesn't match password confirmation"} ] } }
+            )
         }
     	delete attrs.pasConfirmation; // so that it does not store the confirmation
 
@@ -56,9 +58,9 @@
         	});
         });
 
-    },
-    toJSON: function() {
-      var obj = this.toObject();
+      },
+      toJSON: function() {
+        var obj = this.toObject();
       // Remove the password object value
       delete obj.password;
       // return the new object without password

@@ -41,6 +41,8 @@ module.exports.routes = {
   'get /logout': 'UserController.logout',
   'get /register': 'UserController.registration',
   'post /register': 'UserController.create',
+  'get /orderstart': 'OrderController.start',
+  'get /customer/register': 'CustomerController.registration',
 
   /*
   // But what if you want your home page to display

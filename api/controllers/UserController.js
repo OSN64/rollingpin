@@ -40,14 +40,14 @@
  		User.findOneByEmail(req.body.email).done(function (err, user) {
  			if (err) {
  				req.session.flash = {err: { AuthenticationError: { server: 'DB Error'} }}
-				return res.redirect('/login');
+ 				return res.redirect('/login');
  			}
 
  			if (user) {
  				bcrypt.compare(req.body.password, user.password, function (err, match) {
  					if (err) {
  						req.session.flash = {err: { AuthenticationError: { server: 'Server error'} }}
-						return res.redirect('/login');
+ 						return res.redirect('/login');
  					}
 
  					if (match) {
@@ -64,29 +64,29 @@
 			            // invalid password
 			            req.session.user = null;
 			            req.session.flash = {err: { AuthenticationError: { password: 'Invalid password'} }}
-						return res.redirect('/login');
+			            return res.redirect('/login');
 			        }
 			    });
  			} else {
-				req.session.flash = {err: { AuthenticationError: { name: 'User not found'} }}
-				return res.redirect('/login');
+ 				req.session.flash = {err: { AuthenticationError: { name: 'User not found'} }}
+ 				return res.redirect('/login');
  			}
  		});
- 	},
- 	logout: function(req, res) {
- 		if (req.session.user) {
- 			User.update({id: req.session.user.id},{online: false}).exec(function afterwards(err,updated){});
- 		};
- 		req.session.user = null;
- 		req.session.authenticated = false;
- 		res.redirect("/");
- 	},
- 	create : function  (req, res) {
- 		var Model = User;
+},
+logout: function(req, res) {
+	if (req.session.user) {
+		User.update({id: req.session.user.id},{online: false}).exec(function afterwards(err,updated){});
+	};
+	req.session.user = null;
+	req.session.authenticated = false;
+	res.redirect("/");
+},
+create : function  (req, res) {
+	var Model = User;
 		// // Create monolithic parameter object
 		var params = req.params.all();
 		// console.log(params);
-		// 		// Create user using params
+		// Create user using params
 		params['online'] = true;
 		User.create(params, function(err, user) {
 			
@@ -96,25 +96,30 @@
 			if (err) {
 				// return res.serverError(err);
 				req.session.flash = {
-					err: err
+					err: err.ValidationError
 				}
+				// console.log(err)
+
 				return res.redirect('/register');
-			}
+
+			}			
 			res.status(201);
 			delete user.password; //delete the user password to return the user object
-			console.log(user);
+			// console.log(user);
 
 			req.session.user = user;
 			req.session.authenticated = true;
-			return res.view("home/index",{
-				partials: {
-					head: '../partials/head',
-					tail: '../partials/tail',
-				},
-				username: user.email
-			});
+			return res.redirect("/orderstart"); 
+			// res.view("home/index",{
+			// 	partials: {
+			// 		head: '../partials/head',
+			// 		tail: '../partials/tail',
+			// 	},
+			// 	username: user.email,
+ 		// 		title:"Home",
+			// });
 
-		});
+	});
 		
 	},
 

@@ -1,5 +1,5 @@
 /**
-* Order.js
+* Orderitem.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
@@ -8,28 +8,22 @@
 module.exports = {
 
 	attributes: {
-		customerid : {
+		menuItemid : {
+			type : "string",
+			required : true,
+		},
+		quantity : {
 			type: "integer",
-			required: true
+			required: true,
 		},
-		pricesum : {
+		orderid:{
 			type: "integer",
+			required:true,
 		},
-		method: {
-			type: 'string',
-			enum: ['take-away', 'home-delivery'],
-			required: true
-		},
-		deliveryaddr: {
-			type: "string",
-            required: true
-		}
-
-  	},
-
-  	beforeCreate : function(item, cb){
+	},
+	beforeCreate : function(item, cb){
         //Auto increment workaround
-        var incModel = "Order";
+        var incModel = "Orderitem";
 
         Counter.findOne({"model_name": incModel}).exec(function(err, counter){
             if (err) return err;
@@ -47,6 +41,4 @@ module.exports = {
             }
         });
     },
-  	// function to calculate the sum of the price
-
 };
