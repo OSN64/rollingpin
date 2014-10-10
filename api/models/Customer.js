@@ -22,15 +22,15 @@ module.exports = {
   		required: true
   	},
   	ccardno: {
-  		type: "integer",
+  		type: "string",
   		required: true
   	},
   	ccardexpmon: {
-  		type: "integer",
+  		type: "string",
   		required: true,
   	},
   	ccardexpyear: {
-  		type: "integer",
+  		type: "string",
   		required: true,
   	},
   	ccardname: {

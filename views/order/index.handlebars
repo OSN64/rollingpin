@@ -21,25 +21,30 @@
             <br>
             <a href="/register" title="login">Or  Register</a>
             {{/if}}
+
+            {{#if flash.err}}
+            <ul class="alert alert-success">
+                {{#list flash.err}}
+                    is {{rule}}
+                {{/list}}
+            </ul>
+            {{/if}}
+
             <hr>
             <div class="steps">
-                <form action="" method="get" accept-charset="utf-8">
+                <form id="phoneenter" accept-charset="utf-8">
                     <label>Phone Number:</label>
                     <input type="text" name="phno" placeholder="eg 21121211212"
-                    value="
-                    {{#if phno}}
-                        {{phno}}
-                    {{/if}}
-                    ">
+                    value="{{#if phno}}{{phno}}{{/if}}">
                     <input type="submit" name="submit" value="enter">
                 </form>
                 {{!-- find phone no if not exist change page to register user --}}
                 {{!-- window.location.href = "/customer/register"; --}}
                 
                 {{!-- if exist store cusid  --}}
-                <form id="formordermeth" action="/order/create" method="get" accept-charset="utf-8">
+                <form id="formordermeth" action="/order/create" method="post" accept-charset="utf-8">
                     {{!-- javascript putt this after getting cusid --}}
-                    {{!-- <input type="hidden" name="customerid" value=""> --}}
+                    <input type="hidden" name="customerid" value="">
 
                     <label>Order Method</label>
                     <select name="method">
@@ -51,6 +56,7 @@
                 </form>
                 <button id="historybutt">Order History</button>
                 {{!-- for order history send a web socket to /order?cusid --}}
+
 
             </div>
 
