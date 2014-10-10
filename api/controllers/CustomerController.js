@@ -32,12 +32,16 @@ module.exports = {
 			if (err) {
 				// return res.serverError(err);
 				// return json error
-
+				req.session.flash = {
+					err: err.ValidationError
+				}
+				console.log(err.ValidationError)
+				return res.redirect('/customer/register');
 			}			
 			res.status(201);
 			
 
-			return res.redirect('/orderstart?phno' +customer.phoneno );
+			return res.redirect('/orderstart?phno=' +customer.phoneno );
 			
 		});
 		

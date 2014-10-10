@@ -11,8 +11,10 @@ module.exports = {
  		if (req.session.authenticated) name = req.session.user.email
  		else name = false;
  		var phno = false;
- 		if (req.params.phno) {
- 			phno = req.params.phno;
+ 		req.params.all()
+ 		
+ 		if (req.param('phno')) {
+ 			phno = req.param('phno');
  		}
  		res.view("order/index",{
  			partials: {
@@ -30,7 +32,7 @@ module.exports = {
 			if (err) {
 				// return res.serverError(err);
 				req.session.flash = {
-					err: err
+					err: err.ValidationError
 				}
 				return res.redirect('/orderstart');
 

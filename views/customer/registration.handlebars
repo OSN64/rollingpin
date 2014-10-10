@@ -9,7 +9,14 @@
 <div class="container clearfix">
     <div class="main">
         <h1 id="main-title">
-
+            {{#if flash.err}}
+            <ul class="alert alert-success">
+                {{#list flash.err}}
+                    is {{rule}}
+                {{/list}}
+            </ul>
+            {{/if}}
+            <hr>
             <div class="steps">
                 <form action="/customer/create" method="post" accept-charset="utf-8">
                     <label>First name</label>  
