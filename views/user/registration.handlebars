@@ -12,15 +12,15 @@
         <h2>Getting started</h2>
         {{#if flash.err}}
         <ul class="alert alert-success">
-                {{#list flash.err}}
-                    {{#if data}}
-                        {{data}}
-                    {{else}}
-                        is {{rule}}
-                     {{/if}} 
-                {{/list}}
-            </ul>
-            {{/if}}
+            {{#list flash.err}}
+            {{#if data}}
+            {{data}}
+            {{else}}
+            is {{rule}}
+            {{/if}} 
+            {{/list}}
+        </ul>
+        {{/if}}
             <p>Don't worry, we've got your back.</p>
             <form action="/register" method="post" accept-charset="utf-8">
                 <label>Name :</label>
