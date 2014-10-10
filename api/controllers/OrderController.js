@@ -30,7 +30,6 @@
  		var params = req.params.all();
  		Order.create(params, function(err, order) {
  			if (err) {
-				// return res.serverError(err);
 				req.session.flash = {
 					err: err.ValidationError
 				}
@@ -40,9 +39,6 @@
 			res.status(201);
 
 			Menuitem.find("", function (err,found){
-
-				console.log(found)
-				console.log("is array : " + Array.isArray([]))
 				return res.view("order/create",{
 					partials: {
 						head: '../partials/head',
@@ -58,6 +54,9 @@
 
 		});
 
+ 	},
+ 	history : function (req,res){
+ 		console.log("Asa")
  	},
  };
 
