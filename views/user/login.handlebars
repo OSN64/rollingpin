@@ -12,52 +12,51 @@
         <h2>Getting started</h2>
         {{#if flash.err}}
         <ul class="alert alert-success">
-           {{!-- {{Object.keys(flash.err).forEach(function(error) {}}
-           <li>{{JSON.stringify(flash.err[error])}}</li>
-           {{ }) }} --}}
-           something wrong this doesnt work i have the flash.err storring the errors
-       </ul>
-       {{/if}}
-
-        <p>Don't worry, we've got your back.</p>
-
-        <form action="/login" method="post" accept-charset="utf-8">
-            <label>Email:</label>
-           <input type="email" name="email" placeholder="">
-            <label>Password:</label>
-            <input type="password" name="password" placeholder="">
-            <input type="submit" value="Log In">
-        </form>
-    </div>
-    <div class="side-bar">
-        <h4 id="new">
-            New to Sails?
-        </h4>
-        <ul>
-            <li>
-                <a href="http://sailsjs.org">Visit sailsjs.org</a>
-            </li>
-            <li>
-                <a href="http://sailsjs.org/#!documentation">Documentation</a>
-            </li>
+            {{#listerr flash.err}}
+                {{data}}
+            {{/listerr}}
         </ul>
-        <h4>
-            Next Steps
-        </h4>
-        <ul>
-            <li class="sprite single_page">
-                <a target="_blank" href="http://sailsjs.org">Build a single page app</a>
-            </li>
-            <li class="sprite traditional">
-                <a target="_blank" href="http://sailsjs.org">Build a traditional webapp</a>
-            </li>
-            <li class="sprite realtime">
-                <a target="_blank" href="http://sailsjs.org">Build a realtime app</a>
-            </li>
-            <li class="sprite api">
-                <a target="_blank" href="http://sailsjs.org">Build an API</a>
-            </li>
-        </ul>
-    </div>
+        {{/if}}
+
+    <p>Don't worry, we've got your back.</p>
+
+    <form action="/login" method="post" accept-charset="utf-8">
+        <label>Email:</label>
+        <input type="email" name="email" placeholder="">
+        <label>Password:</label>
+        <input type="password" name="password" placeholder="">
+        <input type="submit" value="Log In">
+    </form>
+</div>
+<div class="side-bar">
+    <h4 id="new">
+        New to Sails?
+    </h4>
+    <ul>
+        <li>
+            <a href="http://sailsjs.org">Visit sailsjs.org</a>
+        </li>
+        <li>
+            <a href="http://sailsjs.org/#!documentation">Documentation</a>
+        </li>
+    </ul>
+    <h4>
+        Next Steps
+    </h4>
+    <ul>
+        <li class="sprite single_page">
+            <a target="_blank" href="http://sailsjs.org">Build a single page app</a>
+        </li>
+        <li class="sprite traditional">
+            <a target="_blank" href="http://sailsjs.org">Build a traditional webapp</a>
+        </li>
+        <li class="sprite realtime">
+            <a target="_blank" href="http://sailsjs.org">Build a realtime app</a>
+        </li>
+        <li class="sprite api">
+            <a target="_blank" href="http://sailsjs.org">Build an API</a>
+        </li>
+    </ul>
+</div>
 </div>
 {{> tail}}
