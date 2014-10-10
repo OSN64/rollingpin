@@ -11,29 +11,25 @@
  module.exports.bootstrap = function (cb) {
 
 	//set seed values here
-	// Menuitem.destroy().exec(console.log);
-	// Counter.destroy().exec(console.log);
-	// User.destroy().exec(console.log);
-	// Orderitem.destroy().exec(console.log);
-	// Order.destroy().exec(console.log);
-	// Customer.destroy().exec(console.log);
-	// Counter.create({amount:'0', model_name:'Menuitem'}).exec(console.log);
-	// Counter.create({amount:'0', model_name:'User'}).exec(console.log);
-	// Counter.create({amount:'0', model_name:'Orderitem'}).exec(console.log);
-	// Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
-	// Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
+	function seed () {
+		Menuitem.destroy().exec(console.log);
+		Counter.destroy().exec(console.log);
+		User.destroy().exec(console.log);
+		Orderitem.destroy().exec(console.log);
+		Order.destroy().exec(console.log);
+		Customer.destroy().exec(console.log);
+		Counter.create({amount:'0', model_name:'Menuitem'}).exec(console.log);
+		Counter.create({amount:'0', model_name:'User'}).exec(console.log);
+		Counter.create({amount:'0', model_name:'Orderitem'}).exec(console.log);
+		Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
+		Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
+	}
+
+	// seed();
 
 
 
 
-	// Handlebars.registerHelper('jsonerr', function(context) {
-	// 	var errors;
-	// 	Object.keys(context).forEach(function(error){
-	// 		errors = "<li>" + JSON.stringify(context[error]) + "</li>"
-	// 	})
-
-	// 	return errors;
-	// });
 	Handlebars.registerHelper('list', function(context, options) {
 		var ret = "<ul>";
 
