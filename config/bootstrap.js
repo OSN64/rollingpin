@@ -23,13 +23,13 @@
 		Counter.create({amount:'0', model_name:'Orderitem'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
-		// Customer.create({namefirst:"sa",
-		// 	namelast: "asas",
-		// 	phoneno: "12345",
-		// 	ccardno:"2223233",
-		// 	ccardexpmon:"22",
-		// 	ccardexpyear:"33",
-		// 	ccardname:"msamas",
+		// Customer.create({nameFirst:"sa",
+		// 	nameLast: "asas",
+		// 	phoneNo: "12345",
+		// 	cCardNo:"2223233",
+		// 	cCardExpMon:"22",
+		// 	cCardExpYear:"33",
+		// 	cCardName:"msamas",
 		// 	addr:"hsh drive"
 		// }).exec(console.log);
 }

@@ -8,7 +8,7 @@
 module.exports = {
 
 	attributes: {
-		menuItemid : {
+		menuItemId : {
 			type : "string",
 			required : true,
 		},
@@ -16,7 +16,7 @@ module.exports = {
 			type: "integer",
 			required: true,
 		},
-		orderid:{
+		orderId:{
 			type: "integer",
 			required:true,
 		},

@@ -10,11 +10,11 @@
  		var name = false;
  		if (req.session.authenticated) name = req.session.user.email
  			else name = false;
- 		var phno = false;
+ 		var phNo = false;
  		req.params.all()
  		
- 		if (req.param('phno')) {
- 			phno = req.param('phno');
+ 		if (req.param('phNo')) {
+ 			phNo = req.param('phNo');
  		}
  		res.view("order/index",{
  			partials: {
@@ -23,7 +23,7 @@
  			},
  			title:"Order",
  			username: name,
- 			phno : phno
+ 			phNo : phNo
  		});
  	},
  	create : function  (req, res) {
@@ -46,7 +46,7 @@
  					},
  					order: order,
  					title:"Order",
- 					menuitems : found,
+ 					menuItems : found,
  				});
  			});
  		});
@@ -54,7 +54,7 @@
  	history : function (req,res){
  		var params = req.params.all();
 
- 		params.customerid = parseInt(params.customerid) 		
+ 		params.customerId = parseInt(params.customerId) 		
  		Order.find(params, function(err, orders) {
  			if (err) {
  				console.log(err)
