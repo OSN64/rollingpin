@@ -25,7 +25,7 @@
 		Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
 	}
 
-	// seed();
+	 //seed();
 
 
 
