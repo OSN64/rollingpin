@@ -13,7 +13,7 @@ module.exports = {
  		var phno = false;
  		if (req.params.phno) {
  			phno = req.params.phno;
- 		};
+ 		}
  		res.view("order/index",{
  			partials: {
  				head: '../partials/head',
@@ -21,7 +21,7 @@ module.exports = {
  			},
  			title:"Order",
  			username: name,
- 			phno = phno
+ 			phno : phno
  		});
  	},
  	create : function  (req, res) {

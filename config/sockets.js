@@ -26,9 +26,9 @@ module.exports.sockets = {
     // };
     //this is intresting the sessions get shared on both express and socket.ip
     // console.log(session);
-    socket.on('allorders', function(data) {
-        console.log("User sent this"+ data.user );
-    });
+    // socket.on('allorders', function(data) {
+    //     console.log("User sent this"+ data.user );
+    // });
 
   },
 

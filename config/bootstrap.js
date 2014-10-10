@@ -7,8 +7,8 @@
  * For more information on bootstrapping your app, check out:
  * http://sailsjs.org/#documentation
  */
-
-module.exports.bootstrap = function (cb) {
+ var Handlebars = require('handlebars');
+ module.exports.bootstrap = function (cb) {
 
 	//set seed values here
 	// Menuitem.destroy().exec(console.log);
@@ -26,8 +26,26 @@ module.exports.bootstrap = function (cb) {
 
 
 
+	// Handlebars.registerHelper('jsonerr', function(context) {
+	// 	var errors;
+	// 	Object.keys(context).forEach(function(error){
+	// 		errors = "<li>" + JSON.stringify(context[error]) + "</li>"
+	// 	})
 
+	// 	return errors;
+	// });
+	Handlebars.registerHelper('list', function(context, options) {
+		var ret = "<ul>";
 
+		Object.keys(context).forEach(function(error){
+			console.log(error)
+			for(var i=0, j=context[error].length; i<j; i++) {
+				// console.log(error.length)
+				ret = ret + "<li>" + error + options.fn(context[error][i]) + "</li>";
+			}
+		})
+		return ret + "</ul>";
+	});
   // It's very important to trigger this callack method when you are finished 
   // with the bootstrap!  (otherwise your server will never lift, since it's waiting on the bootstrap)
   cb();

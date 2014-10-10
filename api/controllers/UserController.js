@@ -86,7 +86,7 @@ create : function  (req, res) {
 		// // Create monolithic parameter object
 		var params = req.params.all();
 		// console.log(params);
-		// 		// Create user using params
+		// Create user using params
 		params['online'] = true;
 		User.create(params, function(err, user) {
 			
@@ -96,27 +96,30 @@ create : function  (req, res) {
 			if (err) {
 				// return res.serverError(err);
 				req.session.flash = {
-					err: err
+					err: err.ValidationError
 				}
+				// console.log(err)
+
 				return res.redirect('/register');
 
 			}			
 			res.status(201);
 			delete user.password; //delete the user password to return the user object
-			console.log(user);
+			// console.log(user);
 
 			req.session.user = user;
 			req.session.authenticated = true;
-			return res.view("home/index",{
-				partials: {
-					head: '../partials/head',
-					tail: '../partials/tail',
-				},
-				username: user.email,
- 				title:"Home",
-			});
+			return res.redirect("/orderstart"); 
+			// res.view("home/index",{
+			// 	partials: {
+			// 		head: '../partials/head',
+			// 		tail: '../partials/tail',
+			// 	},
+			// 	username: user.email,
+ 		// 		title:"Home",
+			// });
 
-		});
+	});
 		
 	},
 

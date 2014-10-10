@@ -21,7 +21,7 @@
             <br>
             <a href="/register" title="login">Or  Register</a>
             {{/if}}
-
+            <hr>
             <div class="steps">
                 <form action="" method="get" accept-charset="utf-8">
                     <label>Phone Number:</label>
@@ -37,7 +37,7 @@
                 {{!-- window.location.href = "/customer/register"; --}}
                 
                 {{!-- if exist store cusid  --}}
-                <form action="/order/create" method="get" accept-charset="utf-8">
+                <form id="formordermeth" action="/order/create" method="get" accept-charset="utf-8">
                     {{!-- javascript putt this after getting cusid --}}
                     {{!-- <input type="hidden" name="customerid" value=""> --}}
 
@@ -49,7 +49,7 @@
                     <input type="text" name="deliveryaddr" placeholder="eg 23 road">
                     <input type="submit" name="submit" value="Order Now">
                 </form>
-                <button>Order History</button>
+                <button id="historybutt">Order History</button>
                 {{!-- for order history send a web socket to /order?cusid --}}
 
             </div>
@@ -86,4 +86,5 @@
             </ul>
         </div>
     </div>
+    <script type="text/javascript" src="/js/befOrder.js"></script>
     {{> tail}}

@@ -31,7 +31,7 @@
 
     });
 
-    socket.emit('allorders', {user:"zxz"});
+    // socket.emit('allorders', {user:"zxz"});
     ///////////////////////////////////////////////////////////
     // Here's where you'll want to add any custom logic for
     // when the browser establishes its socket connection to 
