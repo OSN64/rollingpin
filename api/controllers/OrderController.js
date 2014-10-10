@@ -5,11 +5,11 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-module.exports = {
-	start: function(req, res) {
+ module.exports = {
+ 	start: function(req, res) {
  		var name = false;
  		if (req.session.authenticated) name = req.session.user.email
- 		else name = false;
+ 			else name = false;
  		var phno = false;
  		req.params.all()
  		
@@ -27,9 +27,9 @@ module.exports = {
  		});
  	},
  	create : function  (req, res) {
-		var params = req.params.all();
-		Order.create(params, function(err, order) {
-			if (err) {
+ 		var params = req.params.all();
+ 		Order.create(params, function(err, order) {
+ 			if (err) {
 				// return res.serverError(err);
 				req.session.flash = {
 					err: err.ValidationError
@@ -38,19 +38,26 @@ module.exports = {
 
 			}			
 			res.status(201);
-			
-			return res.view("order/create",{
-				partials: {
-					head: '../partials/head',
-					tail: '../partials/tail',
-				},
-				order: order,
- 				title:"Order",
+
+			Menuitem.find("", function (err,found){
+
+				console.log(found)
+				console.log("is array : " + Array.isArray([]))
+				return res.view("order/create",{
+					partials: {
+						head: '../partials/head',
+						tail: '../partials/tail',
+					},
+					order: order,
+					title:"Order",
+					menuitems : found,
+				});
 
 			});
 
+
 		});
-		
-	},
-};
+
+ 	},
+ };
 
