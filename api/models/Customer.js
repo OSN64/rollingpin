@@ -9,31 +9,31 @@
 module.exports = {
 
   attributes: {
-  	namefirst: {
+  	nameFirst: {
   		type: "string",
   		required: true
   	},
-  	namelast: {
+  	nameLast: {
   		type: "string",
   		required: true
   	},
-  	phoneno: {
+  	phoneNo: {
   		type: "string",
   		required: true
   	},
-  	ccardno: {
+  	cCardNo: {
   		type: "string",
   		required: true
   	},
-  	ccardexpmon: {
+  	cCardExpMon: {
   		type: "string",
   		required: true,
   	},
-  	ccardexpyear: {
+  	cCardExpYear: {
   		type: "string",
   		required: true,
   	},
-  	ccardname: {
+  	cCardName: {
   		type: "string",
   		required: true
   	},

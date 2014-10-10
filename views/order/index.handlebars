@@ -14,10 +14,10 @@
 
     <div class="steps">
 
-        <form id="phoneenter" accept-charset="utf-8">
+        <form id="phoneEnter" accept-charset="utf-8">
             <div class="input-group">
                 <span class="input-group-addon">Phone #</span>
-                <input type="text" name="phno" class="form-control" placeholder="eg 5517 9000" value="{{#if phno}}{{phno}}{{/if}}">
+                <input type="text" name="phNo" class="form-control" placeholder="eg 5517 9000" value="{{#if phNo}}{{phNo}}{{/if}}">
             </div>
 
             <input type="submit" name="submit" value="Search">
@@ -27,16 +27,16 @@
         {{!-- window.location.href = "/customer/register"; --}}
 
         {{!-- if exist store cusid  --}}
-        <form id="formordermeth" action="/order/create" method="post" accept-charset="utf-8">
+        <form id="formOrderMeth" action="/order/create" method="post" accept-charset="utf-8">
             {{!-- javascript putt this after getting cusid --}}
-            <input type="hidden" name="customerid" value="">
+            <input type="hidden" name="customerId" value="">
 
             <label>Order Method</label>
             <select name="method">
                 <option value="take-away">take-away</option>
                 <option value="home-delivery">home-delivery</option>
             </select>
-            <input type="text" name="deliveryaddr" placeholder="eg 23 road">
+            <input type="text" name="deliveryAddr" placeholder="eg 23 road">
             <input type="submit" name="submit" value="Order Now">
         </form>
         {{!-- for order history send a web socket to /order?cusid --}}

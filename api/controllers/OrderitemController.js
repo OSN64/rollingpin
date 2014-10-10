@@ -1,5 +1,5 @@
 /**
- * CustomerController
+ * OrderitemController
  *
  * @module      :: Controller
  * @description	:: A set of functions called `actions`.
@@ -17,40 +17,12 @@
 
 module.exports = {
     
-  registration: function(req,res){
- 		res.view("customer/registration",{
- 			partials: {
- 				head: '../partials/head',
- 				tail: '../partials/tail',
- 			},
- 			title:"Customer Registration"
- 		});
- 	},
- 	create : function  (req, res) {
-		var params = req.params.all();
-		Customer.create(params, function(err, customer) {
-			if (err) {
-				// return res.serverError(err);
-				// return json error
-				req.session.flash = {
-					err: err.ValidationError
-				}
-				console.log(err.ValidationError)
-				return res.redirect('/customer/register');
-			}			
-			res.status(201);
-			
-
-			return res.redirect('/orderstart?phNo=' +customer.phoneNo );
-			
-		});
-		
-	},
+  // overide create function and find the total price of the item
 
 
   /**
    * Overrides for the settings in `config/controllers.js`
-   * (specific to CustomerController)
+   * (specific to OrderitemController)
    */
   _config: {}
 

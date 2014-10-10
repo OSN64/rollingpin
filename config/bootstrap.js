@@ -23,27 +23,26 @@
 		Counter.create({amount:'0', model_name:'Orderitem'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
-		// Customer.create({namefirst:"sa",
-		// 	namelast: "asas",
-		// 	phoneno: "12345",
-		// 	ccardno:"2223233",
-		// 	ccardexpmon:"22",
-		// 	ccardexpyear:"33",
-		// 	ccardname:"msamas",
-		// 	addr:"hsh drive"
-		// }).exec(console.log);
+		//menue items 
+
+		Menuitem.create({name:'simething', price:'234',description:'quasdad'}).exec(console.log);
+		Menuitem.create({name:'asd', price:'54',description:'asd'}).exec(console.log);
+		Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}).exec(console.log);
+		Menuitem.create({name:'qwe', price:'566',description:'asdasd'}).exec(console.log);
+		Menuitem.create({name:'ert', price:'234',description:'asd'}).exec(console.log);
+		Menuitem.create({name:'wer', price:'45',description:'asd'}).exec(console.log);
 }
 
-	 //seed();
+	 // seed();
 
 
 
 
 	Handlebars.registerHelper('listerr', function(context, options) {
 		var ret = "";
-
+		console.log("asasdsad")
 		Object.keys(context).forEach(function(error){
-			// console.log(error)
+			console.log(error)
 			for(var i=0, j=context[error].length; i<j; i++) {
 				// console.log(error.length)
 				ret = ret + "<li>" + error + options.fn(context[error][i]) + "</li>";

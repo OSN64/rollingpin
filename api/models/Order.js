@@ -8,11 +8,11 @@
 module.exports = {
 
 	attributes: {
-		customerid : {
+		customerId : {
 			type: "integer",
 			required: true
 		},
-		pricesum : {
+		priceSum : {
 			type: "integer",
 		},
 		method: {
@@ -20,7 +20,7 @@ module.exports = {
 			enum: ['take-away', 'home-delivery'],
 			required: true
 		},
-		deliveryaddr: {
+		deliveryAddr: {
 			type: "string",
             required: true
 		}
