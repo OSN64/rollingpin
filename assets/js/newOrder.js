@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#formordermeth').hide();
-    $('#historybutt').hide();
+    $('#orderHistory').hide();
 
 
     $('#phoneenter').submit(function(e) {
@@ -13,12 +13,12 @@ $(document).ready(function () {
                 console.log("create new user")
                 window.location.href = "/customer/register";
             }else{
+                $('#orderHistory').prop('href',"/order/history?customerid=" +response[0].id);
                 $('#phoneenter').hide('slow');
                 $('#formordermeth').show('slow');
-                $('#historybutt').show('slow');
-                console.log("get phone no and set form input to it and show button")
-
-                $('[name="customerid"]').val(phone);
+                $('#orderHistory').show('slow');
+                //set customer no with first array object
+                $('[name="customerid"]').val(response[0].id);
 
             }
         });

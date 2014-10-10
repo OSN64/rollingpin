@@ -30,33 +30,45 @@
  		var params = req.params.all();
  		Order.create(params, function(err, order) {
  			if (err) {
-				req.session.flash = {
-					err: err.ValidationError
-				}
-				return res.redirect('/orderstart');
+ 				req.session.flash = {
+ 					err: err.ValidationError
+ 				}
+ 				return res.redirect('/orderstart');
 
-			}			
-			res.status(201);
+ 			}			
+ 			res.status(201);
 
-			Menuitem.find("", function (err,found){
-				return res.view("order/create",{
-					partials: {
-						head: '../partials/head',
-						tail: '../partials/tail',
-					},
-					order: order,
-					title:"Order",
-					menuitems : found,
-				});
-
-			});
-
-
-		});
-
+ 			Menuitem.find("", function (err,found){
+ 				return res.view("order/create",{
+ 					partials: {
+ 						head: '../partials/head',
+ 						tail: '../partials/tail',
+ 					},
+ 					order: order,
+ 					title:"Order",
+ 					menuitems : found,
+ 				});
+ 			});
+ 		});
  	},
  	history : function (req,res){
- 		console.log("Asa")
+ 		var params = req.params.all();
+
+ 		params.customerid = parseInt(params.customerid) 		
+ 		Order.find(params, function(err, orders) {
+ 			if (err) {
+ 				console.log(err)
+ 			}			
+
+ 			return res.view("order/history",{
+ 				partials: {
+ 					head: '../partials/head',
+ 					tail: '../partials/tail',
+ 				},
+ 				title:"History",
+ 				orders:orders
+ 			});
+ 		});
  	},
  };
 
