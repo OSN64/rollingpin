@@ -21,7 +21,7 @@
  		// console.log(params)
  		Menuitem.findOne({id:parseInt(params.menuItemId)}, function (err,menuItem){
  			if (err || !menuItem) {
- 				return res.json({err:"Item notfound"})
+ 				return res.json({err:"Item not found"})
  			};
  			// console.log(menuItem)
  			var cost = params.quantity * menuItem.price;
@@ -50,11 +50,7 @@
  	destroy : function  (req, res) {
 
  		var id = req.param('id');
- 		if (!id) {
- 			return res.json({});
- 		}
-
-		// // Otherwise, find and destroy the model in question
+ 		if (!id) return res.json({err:"Id not found"});
 
 		id = parseInt(id) 		
 		Orderitem.findOne({id:id}, function(err, orderitem) {
@@ -79,9 +75,7 @@
 						if (err) return console.log("Unable to delete");
 						return res.json(orderitem);
 					});
-
 				});
-
 			});
 		});
 	},

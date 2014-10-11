@@ -22,7 +22,7 @@
  				tail: '../partials/tail',
  			},
  			title:"Order",
- 			username: name,
+ 			user: req.session.user,
  			phNo : phNo
  		});
  	},
@@ -48,6 +48,7 @@
  					order: order,
  					title:"Order",
  					menuItems : found,
+ 					user: req.session.user
  				});
  			});
  		});
@@ -74,7 +75,8 @@
  				},
  				title:"History",
  				orders:orders,
- 				totalPrice:totalPrice
+ 				totalPrice:totalPrice,
+ 				user: req.session.user
  			});
  		});
  	},

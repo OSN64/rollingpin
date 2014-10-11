@@ -37,17 +37,18 @@
                 
                 <ul id="navMenu" class="nav">
                     <li class="active"><a href="/">Home</a> </li>
-                    <li><a href="/register">Employee Register</a> </li>
                     <li><a href="/orderstart">New Order</a> </li>
                     <li><a href="/customer/register">Register Customer</a> </li>
                     <li><a href="/menuitem">Menu Items</a> </li>
                 </ul>
-                
-                <ul id="employeeControlMenu" class="nav">
-                    <li>Currently logged in as: "username" zxz </li>
-                    <li><a href="/logout">Employee Logout zxz</a> </li>
-                </ul>
-                
+                    <ul id="employeeControlMenu" class="nav">
+                    {{#if user}}
+                        <li>Currently logged in as: {{user.name}} zxz </li>
+                        <li><a href="/logout">Employee Logout zxz</a> </li
+                    {{else}}
+                        <li><a href="/register">Employee Register</a> </li>
+                    {{/if}}
+                    </ul>
                 <ul id="sidebar-footer" class="nav hidden-xs"> <!-- yolo -->
                     <li>Made with <i class="glyphicon glyphicon-heart-empty"></i> by Griffdream Team </li>
                 </ul>
