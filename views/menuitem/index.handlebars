@@ -1,48 +1,41 @@
 {{> head}}
-<!-- Default home page -->
-<div class="top-bar">
-    <div class="container clearfix">
-        <img class="logo" src="http://sailsjs.org/images/sails-logo.jpg" />
-    </div>
-</div>
+<form action="/menuitem/create" method="post" accept-charset="utf-8">
+<label>Name:</label>
+   <input type="text" name="name" placeholder="chicken">
+   <label>Price: $</label>
+   <input type="number" name="price" placeholder="$">
+   <label>Description:</label>
+   <input type="text" name="description" placeholder="sadsad">
+   <input type="submit" value="Add Menu Item">
+</form>
 
-<div class="container clearfix">
-   <form action="/menuitem/create" method="post" accept-charset="utf-8">
-   <label>Name:</label>
-       <input type="text" name="name" placeholder="chicken">
-       <label>Price: $</label>
-       <input type="number" name="price" placeholder="$">
-       <label>Description:</label>
-       <input type="text" name="description" placeholder="sadsad">
-       <input type="submit" value="Add Menu Item">
-   </form>
-
-   {{#if menuItems}}        
-   <div class="panel panel-default">
-    <div class="panel-heading"><h4>Menu Items</h4></div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each menuItems}}
-            <tr>
-                <td>{{id}}</td>
-                <td>{{name}}</td>
-                <td>$ {{price}}</td>
-                <td>{{description}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
+{{#if menuItems}}        
+<div class="panel panel-default">
+<div class="panel-heading"><h4>Menu Items</h4></div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each menuItems}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>$ {{price}}</td>
+            <td>{{description}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
 </div>
 {{else}}
 <h3>No Menu Items</h3>
 {{/if}}
-</div>
+
+
 {{> tail}}

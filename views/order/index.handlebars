@@ -19,8 +19,10 @@
                 <span class="input-group-addon">Phone #</span>
                 <input type="text" name="phNo" class="form-control" placeholder="eg 5517 9000" value="{{#if phNo}}{{phNo}}{{/if}}">
             </div>
-
-            <input type="submit" name="submit" value="Search">
+            
+            <button type="submit" class="btn btn-default btn-lg btn-success">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
         </form>
 
         {{!-- find phone no if not exist change page to register user --}}

@@ -11,7 +11,7 @@
                 is {{rule}}
             {{/if}} 
         {{/listerr}}
-    </ul>
+    </ul><hr>
 {{/if}}
     
     <p>Complete the form below to create a new employee login account.</p>
@@ -40,4 +40,10 @@
     </form>
     
 </div> <!-- /.main -->
+
+<script type="text/javascript">
+$(document).ready(function () {
+    $('[name="name"]').focus();
+});
+</script>
 {{> tail}}
