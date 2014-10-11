@@ -15,26 +15,67 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-module.exports = {
-    destroy : function  (req, res) {
+ module.exports = {
+ 	create : function  (req, res) {
+ 		var params = req.params.all();
+ 		// console.log(params)
+ 		Menuitem.findOne({id:parseInt(params.menuItemId)}, function (err,menuItem){
+ 			if (err || !menuItem) {
+ 				return res.json({err:"Item not found"})
+ 			};
+ 			// console.log(menuItem)
+ 			var cost = params.quantity * menuItem.price;
+ 			console.log("total cost: $" + cost)
+ 			Order.findOne({id:parseInt(params.orderId)}, function(err, order) {
+ 				if (err) {
+ 					console.log(err)
+ 				}		
+ 				// console.log(order)
+ 				order.addSum(cost);
+ 				Orderitem.create(params, function(err, orderItem) {
+ 					if (err) {
+ 						return res.json({err:"Cannot create"});
+ 					}			
+ 					orderItem["cost"] = cost;
+ 					// console.log(orderItem)
+ 					return res.json(orderItem);
 
-		var id = req.param('id');
-		if (!id) {
-			return res.json({});
-		}
+ 				});
+ 			});
 
-		// // Otherwise, find and destroy the model in question
+ 			
+ 		});
+ 		
+ 	},
+ 	destroy : function  (req, res) {
 
- 		id = parseInt(id) 		
-		Orderitem.findOne({id:id}, function(err, result) {
+ 		var id = req.param('id');
+ 		if (!id) return res.json({err:"Id not found"});
+
+		id = parseInt(id) 		
+		Orderitem.findOne({id:id}, function(err, orderitem) {
 			if (err) return console.log(err);
 
-			if (!result) return res.json({err:"notfound"});
-			// console.log(result)
+			if (!orderitem) return res.json({err:"notfound"});
+			console.log(orderitem)
 
-			Orderitem.destroy(id, function(err) {
-				if (err) return console.log("Unable to delete");
-					return res.json(result);
+			Menuitem.findOne({id:parseInt(orderitem.menuItemId)}, function (err,menuItem){
+				if (err || !menuItem) return res.json({err:"Item not found"})
+
+				console.log(menuItem)
+				var cost = orderitem.quantity * menuItem.price;
+				console.log("it cost: " + cost)
+				Order.findOne({id:parseInt(orderitem.orderId)}, function(err, order) {
+					if (err || !order) return res.json({err:"order not found"})
+
+					console.log(order)
+					order.subSum(cost);
+
+					Orderitem.destroy(id, function(err) {
+						if (err) return console.log("Unable to delete");
+						return res.json(orderitem);
+					});
+				});
 			});
 		});
 	},
@@ -43,7 +84,7 @@ module.exports = {
    * Overrides for the settings in `config/controllers.js`
    * (specific to OrderitemController)
    */
-  _config: {}
+   _config: {}
 
-  
+
 };

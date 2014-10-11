@@ -17,17 +17,13 @@
 
  module.exports = {
  	index: function(req, res) {
- 		var name = false;
- 		if (req.session.authenticated) name = req.session.user.email
- 		else name = false;
-
  		res.view("home/index",{
  			partials: {
  				head: '../partials/head',
  				tail: '../partials/tail',
  			},
  			title:"Home",
- 			username: name
+ 			user: req.session.user
  		});
 		// res.json({name: "dave" , person: 3});
  	},

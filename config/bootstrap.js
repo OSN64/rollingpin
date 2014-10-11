@@ -26,16 +26,28 @@
 		
 		// do not uncomment  these lines having async issues
 		// change exec to somethng else
- 		// Menuitem.create({name:'simething', price:'234',description:'quasdad'}, function(err, menuitem) {console.log(menuitem)});
- 		// Menuitem.create({name:'asd', price:'54',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
- 		// Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}, function(err, menuitem) {console.log(menuitem)});
- 		// Menuitem.create({name:'qwe', price:'566',description:'asdasd'}, function(err, menuitem) {console.log(menuitem)});
- 		// Menuitem.create({name:'ert', price:'234',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
- 		// Menuitem.create({name:'wer', price:'45',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
-}
+		Menuitem.create({name:'simething', price:'234',description:'quasdad'}, function(err, menuitem) {
+			console.log(menuitem)
+			Menuitem.create({name:'asd', price:'54',description:'asd'}, function(err, menuitem) {
+				console.log(menuitem)
+				Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}, function(err, menuitem) {
+					console.log(menuitem)
+					Menuitem.create({name:'qwe', price:'566',description:'asdasd'}, function(err, menuitem) {
+						console.log(menuitem)
+						Menuitem.create({name:'ert', price:'234',description:'asd'}, function(err, menuitem) {
+							console.log(menuitem)
+							Menuitem.create({name:'wer', price:'45',description:'asd'}, function(err, menuitem) {
+								console.log(menuitem)
 
-	 // seed();
+							});
+						});
+					});
+				});
+			});
+		});
+	}
 
+	// seed();
 
 	Handlebars.registerHelper('listerr', function(context, options) {
 		var ret = "";
