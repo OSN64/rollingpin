@@ -36,7 +36,19 @@
  		});
  	},
  	create : function  (req, res) {
+ 		function isEmpty (str) {
+ 			return (!str || str.length === 0)
+ 		}
  		var params = req.params.all();
+ 		console.log(params)
+ 		if ( isEmpty(params.name) || isEmpty(params.price) || isEmpty(params.description)) {
+ 			console.log("empty")
+ 			return res.redirect('/menuitem'); 			
+ 		}
+ 		params.name = params.name.trim()
+ 		params.price = params.price.trim()
+ 		params.description = params.description.trim();
+ 		
  		Menuitem.create(params, function(err, menuitems) {
  			if (err) {
  				req.session.flash = {
@@ -48,7 +60,7 @@
  			res.status(201);
  			return res.redirect('/menuitem');
  		});
- 	},
+},
 
 
   /**
