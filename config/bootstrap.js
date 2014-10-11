@@ -39,7 +39,6 @@
 
 	Handlebars.registerHelper('listerr', function(context, options) {
 		var ret = "";
-		console.log("asasdsad")
 		Object.keys(context).forEach(function(error){
 			console.log(error)
 			for(var i=0, j=context[error].length; i<j; i++) {

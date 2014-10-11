@@ -35,7 +35,7 @@ module.exports = {
 				req.session.flash = {
 					err: err.ValidationError
 				}
-				console.log(err.ValidationError)
+				// console.log(err.ValidationError)
 				return res.redirect('/customer/register');
 			}			
 			res.status(201);

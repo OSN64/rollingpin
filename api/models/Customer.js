@@ -23,23 +23,18 @@ module.exports = {
   	},
   	cCardNo: {
   		type: "string",
-  		required: true
   	},
   	cCardExpMon: {
   		type: "string",
-  		required: true,
   	},
   	cCardExpYear: {
   		type: "string",
-  		required: true,
   	},
   	cCardName: {
   		type: "string",
-  		required: true
   	},
   	addr: {
   		type: "string",
-  		required: true
   	},
     
   },
