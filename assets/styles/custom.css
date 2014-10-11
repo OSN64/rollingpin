@@ -120,7 +120,18 @@ a {
 label {
     margin: 5px;
 }
-
+.btn {
+    margin: 1em;
+    margin-right: 0;
+}
+.input-group {
+    margin-bottom: 0.6em;
+}
+input[type=text]:focus {
+    transition: all 1s;
+    box-shadow: 0 3px 6px;
+    border:1px solid rgba(255, 0, 0, 0.7);
+}
 
 h1,h2,h3 {
     font-weight:800;
@@ -148,4 +159,16 @@ h1,h2,h3 {
 
 small.text-muted {
     font-family:courier,courier-new,monospace;
+}
+.input-group-addon {
+    background-color: #1E72B0;
+    color: #fff;
+    border-color: #000;
+    border-top-color: #606060;
+    border-right-color: #606060;
+}
+.form-control {
+    border-color: #000;
+    border-top-color: #606060;
+    border-right-color: #606060;
 }

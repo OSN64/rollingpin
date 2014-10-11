@@ -1,20 +1,20 @@
 {{> head}}
 <div class="main">
-    <h1 id="main-title">Employee Registeration</h1>
+    <h1 id="main-title">Employee Registration</h1>
 
 {{#if flash.err}}
-    <ul class="alert alert-success">
+    <ul class="alert alert-danger">
         {{#listerr flash.err}}
-        {{#if data}}
-        {{data}}
-        {{else}}
-        is {{rule}}
-        {{/if}} 
+            {{#if data}}
+                {{data}}
+            {{else}}
+                is {{rule}}
+            {{/if}} 
         {{/listerr}}
     </ul>
 {{/if}}
     
-    <p>Don't worry, we've got your back.</p>
+    <p>Complete the form below to create a new employee login account.</p>
     <form action="/register" method="post" accept-charset="utf-8">
         <div class="input-group">
             <span class="input-group-addon">Name</span>
@@ -32,8 +32,11 @@
             <span class="input-group-addon">Confirm Password</span>
             <input type="text" name="pasConfirmation" class="form-control">
         </div>
-
-        <input type="submit" value="Register">
+        
+        <button type="submit" class="btn btn-default btn-lg btn-success">
+            <span class="glyphicon glyphicon-floppy-disk"></span> Register
+        </button>
+        
     </form>
     
 </div> <!-- /.main -->
