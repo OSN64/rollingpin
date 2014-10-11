@@ -32,13 +32,16 @@ module.exports = {
             console.log(this.priceSum)
             this.priceSum = this.priceSum + cost;
             console.log(this.priceSum)
-            this.save( function(err,s){
-                
-            });
-            // // Remove the password object value
-            // delete obj.password;
-            // // return the new object without password
-            // return obj;
+            this.save( function(err,s){});
+        },
+        subSum: function(cost) {
+            // var obj = .toObject();
+            console.log(this)
+
+            console.log(this.priceSum)
+            this.priceSum = this.priceSum - cost;
+            console.log(this.priceSum)
+            this.save( function(err,s){});
         },
     },
 

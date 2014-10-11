@@ -18,12 +18,12 @@
  module.exports = {
  	create : function  (req, res) {
  		var params = req.params.all();
- 		console.log(params)
+ 		// console.log(params)
  		Menuitem.findOne({id:parseInt(params.menuItemId)}, function (err,menuItem){
  			if (err || !menuItem) {
  				return res.json({err:"Item notfound"})
  			};
- 			console.log(menuItem)
+ 			// console.log(menuItem)
  			var cost = params.quantity * menuItem.price;
  			console.log("total cost: $" + cost)
  			Order.findOne({id:parseInt(params.orderId)}, function(err, order) {
@@ -32,20 +32,19 @@
  				}		
  				// console.log(order)
  				order.addSum(cost);
+ 				Orderitem.create(params, function(err, orderItem) {
+ 					if (err) {
+ 						return res.json({err:"Cannot create"});
+ 					}			
+ 					orderItem["cost"] = cost;
+ 					// console.log(orderItem)
+ 					return res.json(orderItem);
+
+ 				});
  			});
 
- 			// Orderitem.create(params, function(err, orderItem) {
-	 		// 	if (err) {
-	 		// 		return res.serverError(err);
-	 		// 	}			
-
-	 		// 	console.log()
-	 		// 	/
-
-	 		// 	return res.json(orderItem);
-
-	 		// });
- 	});
+ 			
+ 		});
  		
  	},
  	destroy : function  (req, res) {
@@ -58,15 +57,31 @@
 		// // Otherwise, find and destroy the model in question
 
 		id = parseInt(id) 		
-		Orderitem.findOne({id:id}, function(err, result) {
+		Orderitem.findOne({id:id}, function(err, orderitem) {
 			if (err) return console.log(err);
 
-			if (!result) return res.json({err:"notfound"});
-			// console.log(result)
+			if (!orderitem) return res.json({err:"notfound"});
+			console.log(orderitem)
 
-			Orderitem.destroy(id, function(err) {
-				if (err) return console.log("Unable to delete");
-				return res.json(result);
+			Menuitem.findOne({id:parseInt(orderitem.menuItemId)}, function (err,menuItem){
+				if (err || !menuItem) return res.json({err:"Item not found"})
+
+				console.log(menuItem)
+				var cost = orderitem.quantity * menuItem.price;
+				console.log("it cost: " + cost)
+				Order.findOne({id:parseInt(orderitem.orderId)}, function(err, order) {
+					if (err || !order) return res.json({err:"order not found"})
+
+					console.log(order)
+					order.subSum(cost);
+
+					Orderitem.destroy(id, function(err) {
+						if (err) return console.log("Unable to delete");
+						return res.json(orderitem);
+					});
+
+				});
+
 			});
 		});
 	},
