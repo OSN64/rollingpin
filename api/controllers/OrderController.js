@@ -60,14 +60,21 @@
  			if (err) {
  				console.log(err)
  			}			
-
+ 			// console.log(orders)
+ 			var totalPrice = 0;	
+ 			for(var i=0, j=orders.length; i<j; i++) {
+ 				if (orders[i].priceSum !== undefined ) {
+ 					totalPrice += orders[i].priceSum;
+ 				};
+ 			}
  			return res.view("order/history",{
  				partials: {
  					head: '../partials/head',
  					tail: '../partials/tail',
  				},
  				title:"History",
- 				orders:orders
+ 				orders:orders,
+ 				totalPrice:totalPrice
  			});
  		});
  	},

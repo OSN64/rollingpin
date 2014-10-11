@@ -12,6 +12,7 @@
                         <th>Method</th>
                         <th>Delivery Address</th>
                         <th>Created At</th>
+                        <th>Order price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -21,13 +22,13 @@
                         <td>{{method}}</td>
                         <td>{{deliveryAddr}}</td>
                         <td>{{createdAt}}</td>
-                        {{!-- total sum of price --}}
+                        <td>{{priceSum}}</td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </div>
-            <h3>Total orders price: $ </h3>
+            <h3>Total orders price: $ {{totalPrice}} </h3>
         
     </div>
 {{else}}
