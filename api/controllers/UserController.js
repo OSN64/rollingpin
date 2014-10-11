@@ -59,7 +59,7 @@
 						
 						req.session.user = user;
 						req.session.authenticated = true;
-						return res.redirect('/');
+						return res.redirect('/orderstart');
 					} else {
 			            // invalid password
 			            req.session.user = null;
@@ -110,16 +110,8 @@ create : function  (req, res) {
 			req.session.user = user;
 			req.session.authenticated = true;
 			return res.redirect("/orderstart"); 
-			// res.view("home/index",{
-			// 	partials: {
-			// 		head: '../partials/head',
-			// 		tail: '../partials/tail',
-			// 	},
-			// 	username: user.email,
- 		// 		title:"Home",
-			// });
 
-	});
+		});
 		
 	},
 
