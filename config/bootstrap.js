@@ -23,19 +23,18 @@
 		Counter.create({amount:'0', model_name:'Orderitem'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
-		//menue items 
+		
+		// do not uncomment  these lines having async issues
 		// change exec to somethng else
-		// Menuitem.create({name:'simething', price:'234',description:'quasdad'}).exec(console.log);
-		// Menuitem.create({name:'asd', price:'54',description:'asd'}).exec(console.log);
-		// Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}).exec(console.log);
-		// Menuitem.create({name:'qwe', price:'566',description:'asdasd'}).exec(console.log);
-		// Menuitem.create({name:'ert', price:'234',description:'asd'}).exec(console.log);
-		// Menuitem.create({name:'wer', price:'45',description:'asd'}).exec(console.log);
+ 		// Menuitem.create({name:'simething', price:'234',description:'quasdad'}, function(err, menuitem) {console.log(menuitem)});
+ 		// Menuitem.create({name:'asd', price:'54',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
+ 		// Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}, function(err, menuitem) {console.log(menuitem)});
+ 		// Menuitem.create({name:'qwe', price:'566',description:'asdasd'}, function(err, menuitem) {console.log(menuitem)});
+ 		// Menuitem.create({name:'ert', price:'234',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
+ 		// Menuitem.create({name:'wer', price:'45',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
 }
 
 	 // seed();
-
-
 
 
 	Handlebars.registerHelper('listerr', function(context, options) {
@@ -50,31 +49,8 @@
 		})
 		return ret ;
 	});
-	// Handlebars.registerHelper('listarr', function(context, options) {
-	// 	console.log(context[i])
-
-	// 	var ret = "<ul>";
-	// 	for (var i = 0; i < context.length; i++) {
-	// 		console.log(context[i])
-	// 	}
-	// 	// Object.keys(context).forEach(function(error){
-	// 	// 	// console.log(error)
-	// 	// 	for(var i=0, j=context[error].length; i<j; i++) {
-	// 	// 		// console.log(error.length)
-	// 	// 		ret = ret + "<li>"  + options.fn(context[error][i]) + "</li>";
-	// 	// 	}
-	// 	// })
-
-	// 		return ret + "</ul>";
-	// 	});
-
-
 	Handlebars.registerHelper('each', function(context, options) {
-		var ret = "";
-		
-		// console.log(context)
-		// console.log(options.fn(context[0]))
-		
+		var ret = "";		
 		for(var i=0, j=context.length; i<j; i++) {
 			ret = ret + options.fn(context[i]);
 		}

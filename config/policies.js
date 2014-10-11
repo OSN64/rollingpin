@@ -38,6 +38,12 @@ module.exports.policies = {
   CustomerController: {
     '*': "isAuthenticated",
   },
+  MenuitemController: {
+    '*': "isAuthenticated",
+  },
+  OrderitemController: {
+    '*': "isAuthenticated",
+  },
 
   /*
 	// Here's an example of adding some policies to a controller
