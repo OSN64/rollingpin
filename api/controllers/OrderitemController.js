@@ -15,17 +15,49 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-module.exports = {
-    destroy : function  (req, res) {
+ module.exports = {
+ 	create : function  (req, res) {
+ 		var params = req.params.all();
+ 		console.log(params)
+ 		Menuitem.findOne({id:parseInt(params.menuItemId)}, function (err,menuItem){
+ 			if (err || !menuItem) {
+ 				return res.json({err:"Item notfound"})
+ 			};
+ 			console.log(menuItem)
+ 			var cost = params.quantity * menuItem.price;
+ 			console.log("total cost: $" + cost)
+ 			Order.findOne({id:parseInt(params.orderId)}, function(err, order) {
+ 				if (err) {
+ 					console.log(err)
+ 				}		
+ 				// console.log(order)
+ 				order.addSum(cost);
+ 			});
 
-		var id = req.param('id');
-		if (!id) {
-			return res.json({});
-		}
+ 			// Orderitem.create(params, function(err, orderItem) {
+	 		// 	if (err) {
+	 		// 		return res.serverError(err);
+	 		// 	}			
+
+	 		// 	console.log()
+	 		// 	/
+
+	 		// 	return res.json(orderItem);
+
+	 		// });
+ 	});
+ 		
+ 	},
+ 	destroy : function  (req, res) {
+
+ 		var id = req.param('id');
+ 		if (!id) {
+ 			return res.json({});
+ 		}
 
 		// // Otherwise, find and destroy the model in question
 
- 		id = parseInt(id) 		
+		id = parseInt(id) 		
 		Orderitem.findOne({id:id}, function(err, result) {
 			if (err) return console.log(err);
 
@@ -34,7 +66,7 @@ module.exports = {
 
 			Orderitem.destroy(id, function(err) {
 				if (err) return console.log("Unable to delete");
-					return res.json(result);
+				return res.json(result);
 			});
 		});
 	},
@@ -43,7 +75,7 @@ module.exports = {
    * Overrides for the settings in `config/controllers.js`
    * (specific to OrderitemController)
    */
-  _config: {}
+   _config: {}
 
-  
+
 };

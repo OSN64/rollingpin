@@ -28,6 +28,7 @@
  	},
  	create : function  (req, res) {
  		var params = req.params.all();
+ 		params['priceSum'] = 0;
  		Order.create(params, function(err, order) {
  			if (err) {
  				req.session.flash = {
