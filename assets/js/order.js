@@ -7,12 +7,21 @@ $(document).ready(function () {
             var ordId = $('<p id="orderItemId">').text(response.id);
             var menId = $('<p id="menuItemId">').text(response.menuItemId);
             var quant = $('<p id="quantity">').text(response.quantity);
-            var delBut = $('<button id="del">').text('X');
+            // var delBut = $('<button id="del" value='+ response.id+ ' type="button">').text('Submit');
+            var delBut = $('<a class="btn btn-danger del" data-datac='+ response.id+ '>').text('X');
             $("#orderList").append(
-                $('<li>').append(ordId).append(menId).append(quant).append(delBut)
+                $('<li id= ' + response.id+'>').append(ordId).append(menId).append(quant).append(delBut)
             );
         });
     });
+    $('#orderList').on('click','.del', function(e) {
+            e.preventDefault();
+            var delId = $(this).data('datac');
 
-    //function that deals with dell button
+            socket.delete("/orderitem/"+delId, function (response){
+                console.log(response)
+                console.log(delId)
+                $('#orderList #'+ delId).remove();
+            });
+        });
 }); //ready()
