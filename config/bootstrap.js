@@ -24,13 +24,13 @@
 		Counter.create({amount:'0', model_name:'Order'}).exec(console.log);
 		Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
 		//menue items 
-
-		Menuitem.create({name:'simething', price:'234',description:'quasdad'}).exec(console.log);
-		Menuitem.create({name:'asd', price:'54',description:'asd'}).exec(console.log);
-		Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}).exec(console.log);
-		Menuitem.create({name:'qwe', price:'566',description:'asdasd'}).exec(console.log);
-		Menuitem.create({name:'ert', price:'234',description:'asd'}).exec(console.log);
-		Menuitem.create({name:'wer', price:'45',description:'asd'}).exec(console.log);
+		// change exec to somethng else
+		// Menuitem.create({name:'simething', price:'234',description:'quasdad'}).exec(console.log);
+		// Menuitem.create({name:'asd', price:'54',description:'asd'}).exec(console.log);
+		// Menuitem.create({name:'qwe', price:'34',description:'quasasdasddad'}).exec(console.log);
+		// Menuitem.create({name:'qwe', price:'566',description:'asdasd'}).exec(console.log);
+		// Menuitem.create({name:'ert', price:'234',description:'asd'}).exec(console.log);
+		// Menuitem.create({name:'wer', price:'45',description:'asd'}).exec(console.log);
 }
 
 	 // seed();
