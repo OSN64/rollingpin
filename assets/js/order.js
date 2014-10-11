@@ -17,11 +17,13 @@ $(document).ready(function () {
     $('#orderList').on('click','.del', function(e) {
             e.preventDefault();
             var delId = $(this).data('datac');
-
             socket.delete("/orderitem/"+delId, function (response){
                 console.log(response)
-                console.log(delId)
-                $('#orderList #'+ delId).remove();
+                if (typeof response.err !== "undefined") {
+                    console.log(response.err)
+                }else{
+                    $('#orderList #'+ delId).remove();                    
+                }
             });
         });
 }); //ready()

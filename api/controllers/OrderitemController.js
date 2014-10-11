@@ -16,9 +16,28 @@
  */
 
 module.exports = {
-    
-  // overide create function and find the total price of the item
+    destroy : function  (req, res) {
 
+		var id = req.param('id');
+		if (!id) {
+			return res.json({});
+		}
+
+		// // Otherwise, find and destroy the model in question
+
+ 		id = parseInt(id) 		
+		Orderitem.findOne({id:id}, function(err, result) {
+			if (err) return console.log(err);
+
+			if (!result) return res.json({err:"notfound"});
+			// console.log(result)
+
+			Orderitem.destroy(id, function(err) {
+				if (err) return console.log("Unable to delete");
+					return res.json(result);
+			});
+		});
+	},
 
   /**
    * Overrides for the settings in `config/controllers.js`
