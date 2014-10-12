@@ -160,5 +160,23 @@
 	index : function  (req, res) {
 		return res.redirect("/orderstart");
 	},
+	setPaid : function  (req, res) {
+		if (!req.isSocket) return res.redirect("/orderstart");
+		var id = req.param('id');
+		var paid = req.param('paid');
+ 		if (!paid || !id) {
+ 			return res.json({err:"No Id or Paid value"});
+ 		};
+ 		id = parseInt(id);
+ 		paid = JSON.parse(paid);
+
+ 		Order.update({id:id},{paid:paid}).exec(function afterwards(err,updated){
+
+			if (err) {
+				return res.json({err:"Unable to update paid status of order " + id});
+			}
+			return res.json({err:"Updated order " +updated[0] });		  
+		});
+	},
 };
 
