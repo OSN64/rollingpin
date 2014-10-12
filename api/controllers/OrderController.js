@@ -56,14 +56,13 @@
  	},
  	history : function (req,res){
  		var params = req.params.all();
-
  		params.customerId = parseInt(params.customerId) 		
  		Order.find(params, function(err, orders) {
  			if (err) {
  				console.log(err)
  				return res.json({err:"Order not found"})
  			}
- 			// console.log(orders)
+ 			console.log(orders)
  			var totalPrice = 0;	
  			for(var i=0, j=orders.length; i<j; i++) {
  				if (orders[i].priceSum !== undefined ) {
@@ -93,7 +92,7 @@
  			console.log("Id not found")
  			return res.redirect("/orderstart");
  		};
- 		// console.log(id)	
+ 		// console.log(ordId)	
  		ordId = parseInt(ordId);
  		Orderitem.find({orderId:ordId}, function(err, orderItems) {
  			function isEmpty(obj) {
@@ -178,5 +177,33 @@
 			return res.json({err:"Updated order " +updated[0] });		  
 		});
 	},
+	search : function (req,res){
+ 		var params = req.params.all();
+ 		delete params.submit;
+ 		if (params.paid){ 
+ 			params.paid = JSON.parse(params.paid);
+ 		}else delete params.paid;
+ 		if(params.customerId){ 				
+ 			params.customerId = parseInt(params.customerId) 
+ 		}else delete params.customerId;
+
+ 		console.log(params)
+ 		Order.find(params, function(err, orders) {
+ 			if (err) {
+ 				console.log(err)
+ 				return res.json({err:"Order not found"})
+ 			}
+ 			// console.log(orders)
+			return res.view("order/search",{
+				partials: {
+					head: '../partials/head',
+					tail: '../partials/tail',
+				},
+				title:"Search Order",
+				orders:orders,
+				user:req.session.user
+			});
+ 		});
+ 	},
 };
 

@@ -34,6 +34,7 @@ module.exports.policies = {
   },
   OrderController: {
     '*': "isAuthenticated",
+  	'search': true
   },
   CustomerController: {
     '*' : ['isAuthenticated', 'flash']
