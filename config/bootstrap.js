@@ -25,6 +25,7 @@
     populate.menuItems();
     populate.defaultUsers();
 
+    Menuitem.destroy().exec(console.log);
     Order.destroy().exec(console.log);
     Customer.destroy().exec(console.log);
 
