@@ -12,7 +12,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         socket.get("/orderitem/create?" + $('#addItem').serialize(), function (response) {
-            
+           
             if (jQuery.isEmptyObject(response)) {
             //if (typeof response.err !== "undefined") {
                     console.log(response.err)

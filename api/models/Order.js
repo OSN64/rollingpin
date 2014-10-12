@@ -23,6 +23,10 @@ module.exports = {
 		deliveryAddr: {
 			type: "string",
         },
+        paid: {
+            type: "boolean",
+            defaultsTo: false
+        },
         // function to calculate the sum of the price
         addSum: function(cost) {
             // var obj = .toObject();
