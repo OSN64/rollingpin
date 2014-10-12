@@ -10,10 +10,17 @@ $(document).ready(function () {
     $('.btn-toggle').click(function() {
         //console.log('Switching...' + $(this).text() );
         
+        $('#ref-group').children().hide('fast');
         $('.btn-group').children().removeClass("btn-selected");
         
         $(this).addClass("btn-selected");
         $(this).blur(); // unfocus button - allows CSS style to be applied
+        
+        if ( $(this).is("[itemref]") ) {
+            console.log('** itemref found! **');
+            var itemVal = $(this).attr('itemref');
+            $('#' + itemVal).toggle('slow');
+        }
         
         $('[name="method"]').val( $(this).text().toLowerCase() ); // store the selected value
     });

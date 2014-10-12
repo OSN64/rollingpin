@@ -37,12 +37,14 @@
             
             <div class="btn-group">
                 <button type="button" class="btn-toggle btn btn-default btn-selected">Take-away</button>
-                <button type="button" class="btn-toggle btn btn-default">Home-delivery</button>
+                <button type="button" class="btn-toggle btn btn-default" itemref="addressInput">Home-delivery</button>
             </div> <input type="hidden" name="method" value="">
             
-            <div class="input-group" style="display: none;">
-                <span class="input-group-addon">Delivery Address</span>
-                <input type="text" name="deliveryAddr" class="form-control">
+            <div id="ref-group">
+                <div id="addressInput" class="input-group" style="display: none;">
+                    <span class="input-group-addon">Delivery Address</span>
+                    <input type="text" name="deliveryAddr" class="form-control">
+                </div>
             </div>
             
             <button type="submit" class="btn btn-default btn-lg btn-success">
