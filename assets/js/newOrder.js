@@ -6,7 +6,13 @@ $(document).ready(function () {
     
     $('[name="method"]').val( $('.btn-selected').text().toLowerCase() ); // store the selected value
     
+    /* Order History button - redirect to page */
+    $('#orderHistory').click(function() {
+        console.log('Clicked - order history');
+        window.location.href = "/order/history?customerId=" + $('[name="customerId"]').val();
+    });
     
+    /* Select delivery method (take-away/home-delivery) */
     $('.btn-toggle').click(function() {
         //console.log('Switching...' + $(this).text() );
         
@@ -20,12 +26,16 @@ $(document).ready(function () {
             console.log('** itemref found! **');
             var itemVal = $(this).attr('itemref');
             $('#' + itemVal).toggle('slow');
+            
+            $('#' + itemVal).find('input[type=text]').focus();
+            
+            
         }
         
         $('[name="method"]').val( $(this).text().toLowerCase() ); // store the selected value
     });
     
-    
+    /* Search for phone # */
     $('#phoneEnter').submit(function(e) {
         e.preventDefault();
         
@@ -39,13 +49,11 @@ $(document).ready(function () {
             if (jQuery.isEmptyObject(response)) {
                 window.location.href = "/customer/register";
             } else {
-                $('#orderHistory').prop('href', "/order/history?customerId=" + response[0].id);
+                $('[name="customerId"]').val(response[0].id); //set customer ID with first array object
+                
                 $('#phoneEnter').hide('slow');
                 $('#formOrderMeth').show('slow');
                 $('#orderHistory').show('slow');
-                
-                $('[name="customerId"]').val(response[0].id); //set customer ID with first array object
-
             }
         });
     });

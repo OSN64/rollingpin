@@ -50,7 +50,9 @@
             <button type="submit" class="btn btn-default btn-lg btn-success">
                 <span class="glyphicon glyphicon-shopping-cart"></span> Order Now
             </button>
-            
+            <button id="orderHistory" type="button" class="btn btn-default btn-lg btn-warning">
+                <span class="glyphicon glyphicon-book"></span> Order History
+            </button>
             <!--
             <select name="method">
                 <option value="take-away">take-away</option>
@@ -59,11 +61,11 @@
             <label>Delivery</label>
             <input type="text" name="deliveryAddr" placeholder="eg 23 road">
             <input type="submit" name="submit" value="Order Now">
+
+            <a id="orderHistory" href="">Order History</a>
             -->
         </form>
-        {{!-- for order history send a web socket to /order?cusid --}}
-        <a id="orderHistory" href="">Order History</a>
-
+        
     </div>
 </div> <!-- /.main -->
 
