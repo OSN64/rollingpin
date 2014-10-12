@@ -21,7 +21,7 @@ $(document).ready(function () {
                     
                     $('#orderTable > tbody').append('<tr>' + 
                                                     '<td>'+response.quantity+'</td>' + 
-                                                    '<td><small>('+response.menuItemId+')</small> '+response.menuItemId+'</td>' + 
+                                                    '<td><small>('+response.menuItemId+')</small> '+response.menuItemName+'</td>' + 
                                                     '<td>'+response.cost+'</td>' + 
                                                     '<td><a class="btn btn-danger del" data-datac='+ response.id+ '><span class="glyphicon glyphicon-remove"></span></td>' + 
                                                     '</tr>'
