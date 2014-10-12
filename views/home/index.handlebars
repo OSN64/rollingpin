@@ -9,14 +9,14 @@
 <div class="container clearfix">
     <div class="main">
         <h1 id="main-title">
-            {{#if username}}
-            Welcome employee {{username}}
+            {{#if user}}
+            Welcome employee {{user.email}}
             {{else}}
             Welcome Guest
             {{/if}}</h1>
             <h2>Getting started</h2>
             <p>Don't worry, we've got your back.</p>
-            {{#if username}}
+            {{#if user}}
             <a href="/logout" title="login">Click to logout</a>
             {{else}}
             <a href="/login" title="login">Click to login</a>

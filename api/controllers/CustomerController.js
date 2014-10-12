@@ -23,7 +23,8 @@ module.exports = {
  				head: '../partials/head',
  				tail: '../partials/tail',
  			},
- 			title:"Customer Registration"
+ 			title:"Customer Registration",
+ 			user: req.session.user
  		});
  	},
  	create : function  (req, res) {
@@ -39,20 +40,12 @@ module.exports = {
 				return res.redirect('/customer/register');
 			}			
 			res.status(201);
-			
-
-			return res.redirect('/orderstart?phNo=' +customer.phoneNo );
-			
-		});
-		
+			return res.redirect('/orderstart?phNo=' +customer.phoneNo );			
+		});		
 	},
-
-
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to CustomerController)
    */
-  _config: {}
-
-  
+  _config: {}  
 };

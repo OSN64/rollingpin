@@ -12,7 +12,7 @@
 ```
 git clone https://github.com/osn64/rollingpin.git && cd rollingpin
 sudo npm install -g sails@0.9.x
-sudo apt-get install build-essential python2.7
+sudo apt-get install build-essential python2.7 gcc make
 npm install
 sails lift
 ```

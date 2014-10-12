@@ -10,8 +10,7 @@
 
  	attributes: {
  		name: {
- 			type: 'string',
- 			unique: true, 			
+ 			type: 'string',			
  			required: true
  		},
  		email: {
@@ -30,6 +29,13 @@
     online: {
       type: 'boolean',
       defaultsTo: false
+    },
+    toJSON: function() {
+      var obj = this.toObject();
+      // Remove the password object value
+      delete obj.password;
+      // return the new object without password
+      return obj;
     },
 
   },
@@ -59,13 +65,7 @@
     });
 
     },
-    toJSON: function() {
-    var obj = this.toObject();
-    // Remove the password object value
-    delete obj.password;
-    // return the new object without password
-    return obj;
-    },
+    
 
 
  // setOnline: function (attrs, next) {

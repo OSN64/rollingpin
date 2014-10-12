@@ -22,7 +22,8 @@
  				head: '../partials/head',
  				tail: '../partials/tail',
  			},
- 			title:"Registration"
+ 			title:"Registration",
+ 			user: req.session.user
  		});
  	},
  	login: function(req,res){
@@ -31,7 +32,8 @@
  				head: '../partials/head',
  				tail: '../partials/tail',
  			},
- 			title:"Login"
+ 			title:"Login",
+ 			user: req.session.user
  		});
  	},
  	process: function (req, res) {

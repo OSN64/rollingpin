@@ -36,8 +36,7 @@ module.exports.policies = {
     '*': "isAuthenticated",
   },
   CustomerController: {
-    '*': "isAuthenticated",
-    '*': "flash",
+    '*' : ['isAuthenticated', 'flash']
   },
   MenuitemController: {
     '*': "isAuthenticated",

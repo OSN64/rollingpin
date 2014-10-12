@@ -24,14 +24,14 @@
  			if (err) {
  				console.log(err)
  			}			
-
  			return res.view("menuitem/index",{
  				partials: {
  					head: '../partials/head',
  					tail: '../partials/tail',
  				},
  				title:"Menu Items",
- 				menuItems:menuItems
+ 				menuItems:menuItems,
+ 				user: req.session.user
  			});
  		});
  	},
@@ -55,12 +55,11 @@
  					err: err.ValidationError
  				}
  				return res.redirect('/menuitem');
-
  			}			
  			res.status(201);
  			return res.redirect('/menuitem');
  		});
-},
+ 	},
 
 
   /**

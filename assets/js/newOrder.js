@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $('#formOrderMeth').hide();
     $('#orderHistory').hide();
+    
+    $('[name="phNo"]').focus();
 
 
     $('#phoneEnter').submit(function(e) {
