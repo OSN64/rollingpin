@@ -3,24 +3,41 @@ $(document).ready(function () {
     $('#orderHistory').hide();
     
     $('[name="phNo"]').focus();
-
-
+    
+    $('[name="method"]').val( $('.btn-selected').text().toLowerCase() ); // store the selected value
+    
+    
+    $('.btn-toggle').click(function() {
+        //console.log('Switching...' + $(this).text() );
+        
+        $('.btn-group').children().removeClass("btn-selected");
+        
+        $(this).addClass("btn-selected");
+        $(this).blur(); // unfocus button - allows CSS style to be applied
+        
+        $('[name="method"]').val( $(this).text().toLowerCase() ); // store the selected value
+    });
+    
+    
     $('#phoneEnter').submit(function(e) {
-        var phone = $('[name="phNo"]').val();
         e.preventDefault();
-        // console.log("name = " + phone)
+        
+        $("#main-info").text('Select the delivery method and address.');
+        
+        var phone = $('[name="phNo"]').val();
+        
         socket.get("/Customer/find?phoneNo=" + phone , function (response) { 
-            console.log(response)
+            console.log(response);
+            
             if (jQuery.isEmptyObject(response)) {
-                console.log("create new user")
                 window.location.href = "/customer/register";
-            }else{
-                $('#orderHistory').prop('href',"/order/history?customerId=" +response[0].id);
+            } else {
+                $('#orderHistory').prop('href', "/order/history?customerId=" + response[0].id);
                 $('#phoneEnter').hide('slow');
                 $('#formOrderMeth').show('slow');
                 $('#orderHistory').show('slow');
-                //set customer no with first array object
-                $('[name="customerId"]').val(response[0].id);
+                
+                $('[name="customerId"]').val(response[0].id); //set customer ID with first array object
 
             }
         });
