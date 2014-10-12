@@ -6,6 +6,11 @@ $(document).ready(function () {
         $('#itemIdInput').val(itemID).focus();
     });
     
+    /* Submit Order button press*/
+    $('#submitOrder').click(function() {
+        console.log("submitting order..."+$('[name="orderId"]').val());
+        window.location.href = "/order/" + $('[name="orderId"]').val();
+    });
     
     /* Adding item to ordered list */
     $('#addItem').submit(function(e) {
