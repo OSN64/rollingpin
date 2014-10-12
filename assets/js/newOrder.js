@@ -15,7 +15,7 @@ $(document).ready(function () {
         socket.get("/order/history?customerId=" + $('[name="customerId"]').val() , function (response) { 
             console.log(response);
             
-            if (!jQuery.isEmptyObject(response.orders)) {
+            if (jQuery.isEmptyObject(response.orders)) {
                 console.log("empty")
                 // order empty add whatever
             } else {
