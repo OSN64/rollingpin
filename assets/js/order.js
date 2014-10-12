@@ -6,7 +6,7 @@ $(document).ready(function () {
         $('#itemIdInput').val(itemID).focus();
     });
     
-    /* Submit Order button press*/
+    /* Submit Order button press */
     $('#submitOrder').click(function() {
         console.log("submitting order..."+$('[name="orderId"]').val());
         window.location.href = "/order/" + $('[name="orderId"]').val();

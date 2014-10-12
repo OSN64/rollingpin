@@ -101,16 +101,27 @@ a {
     width:70px;
 }
 
-.nav > li:hover {
+#navMenu, #employeeControlMenu {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 1em;
+}
+
+.nav > li > a:hover {
     transition: margin 0.4s;
     transition-timing-function: linear;
     margin-left: 0.85em;
     font-weight: bold;
 }
 #sidebar, #sidebar a {
+    /*
     color:#ffffff;
     background-color:transparent;
-	text-shadow:1px 0 1px #888888;
+	text-shadow:1px 0 4px #000;
+    */
+    color:#1E72B0;
+    background-color:transparent;
+    text-shadow:1px 0 4px #1E72B0;
+    */
 }
 #sidebar a.logo {
     display:block;
@@ -130,6 +141,7 @@ a {
 #sidebar-footer {
     position:absolute;
     bottom:5px;
+    color: #fff;
 }
 #footer {
     margin-bottom:20px;

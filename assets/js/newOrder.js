@@ -43,8 +43,6 @@ $(document).ready(function () {
             $('#' + itemVal).toggle('slow');
             
             $('#' + itemVal).find('input[type=text]').focus();
-            
-            
         }
         
         $('[name="method"]').val( $(this).text().toLowerCase() ); // store the selected value
