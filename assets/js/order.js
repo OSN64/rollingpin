@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         socket.get("/orderitem/create?" + $('#addItem').serialize(), function (response) {
             if (typeof response.err !== "undefined") {
-                    console.log(response.err)
+                    console.log( "error: "+ response.err)
                 }else{
                     console.log(response); 
                     var ordId = $('<p id="orderItemId">').text(response.id);

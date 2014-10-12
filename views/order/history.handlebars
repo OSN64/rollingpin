@@ -13,6 +13,7 @@
                         <th>Delivery Address</th>
                         <th>Created At</th>
                         <th>Order price</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,12 @@
                         <td>{{deliveryAddr}}</td>
                         <td>{{createdAt}}</td>
                         <td>$ {{priceSum}}</td>
+                        <td>{{#if paid}}
+                                Paid
+                            {{else}}
+                                Unpaid
+                            {{/if}}
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

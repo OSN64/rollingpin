@@ -62,7 +62,7 @@
  			if (err) {
  				console.log(err)
  				return res.json({err:"Order not found"})
- 			}			
+ 			}
  			// console.log(orders)
  			var totalPrice = 0;	
  			for(var i=0, j=orders.length; i<j; i++) {
@@ -70,90 +70,105 @@
  					totalPrice += orders[i].priceSum;
  				};
  			}
- 			return res.view("order/history",{
- 				partials: {
- 					head: '../partials/head',
- 					tail: '../partials/tail',
- 				},
- 				title:"History",
- 				orders:orders,
- 				totalPrice:totalPrice,
- 				user: req.session.user
- 			});
+ 			if (req.isSocket) {
+ 				res.json({orders:orders,totalPrice:totalPrice})
+ 			}else{
+ 				return res.view("order/history",{
+ 					partials: {
+ 						head: '../partials/head',
+ 						tail: '../partials/tail',
+ 					},
+ 					title:"History",
+ 					orders:orders,
+ 					totalPrice:totalPrice,
+ 					user: req.session.user
+ 				});
+ 			}
  		});
  	},
  	find : function  (req, res) {
 
- 		var id = req.param('id');
- 		if (!id) return res.json({err:"Id not found"});
+ 		var ordId = req.param('id');
+ 		if (!ordId) return res.json({err:"Id not found"});
  		// console.log(id)	
- 		
- 		Orderitem.find({orderId:parseInt(id)}, function(err, orderItems) {
+ 		ordId = parseInt(ordId);
+ 		Orderitem.find({orderId:ordId}, function(err, orderItems) {
  			function isEmpty(obj) {
  				return !Object.keys(obj).length > 0;
  			}
  			if (err || isEmpty(orderItems)) {
  				console.log(err)
  				return res.redirect('/orderstart');
- 			}			
- 			var totalCost = 0;
- 			var order = [];
- 			// console.log(orderItems[0])
+ 			}
+ 			Order.findOne({id:ordId}, function(err, sOrder) {
+ 				if (err) console.log(err);
 
- 			// for(var i=0, j=orderItems.length; i<j; i++) {
- 				// if (orders[i].priceSum !== undefined ) {
- 				// 	totalPrice += orders[i].priceSum;
- 				// };
- 				// console.log("order item id: "+orderItems[i].menuItemId)
- 				// console.log("order quantity: "+orderItems[i].quantity)
- 				// var orderItem = orderItems[i];
- 				// console.log(orderItems)
- 				var menuItemPrice;
- 				var index = 0;
- 				findMenuItem(index,totalCost);
- 				function findMenuItem(index,totalCost){
- 					// console.log("index: " + index + " length: " + orderItems.length)
- 					if (orderItems.length == index) {
- 						console.log(order)
- 						return res.view("order/show",{
- 							partials: {
- 								head: '../partials/head',
- 								tail: '../partials/tail',
- 							},
- 							title:"Order",
- 							order: order,
- 							totalCost : totalCost,
- 							user: req.session.user
- 						});
+ 				// console.log(sOrder)
+ 				Customer.findOne({id:parseInt(sOrder.customerId)}, function(err, customer) {
+ 					if (err) console.log(err);
+ 					// console.log(customer)
 
- 					};
- 					var orderItem = orderItems[index];
- 					console.log(orderItem)
- 					Menuitem.findOne({id:parseInt(orderItems[index].menuItemId)}, function (err,menuItem){
- 						console.log(index)
-	 					// console.log(err)
-	 					// console.log(menuItem)
-	 					// console.log(orderItem)
-	 					// console.log("quantity" + orderItems[index].quantity )
-	 					// console.log("price" + menuItem.price )
-	 					menuItemPrice = orderItem.quantity * menuItem.price;
-	 					totalCost = totalCost + menuItemPrice;
-	 					var menuItemName =  menuItem.name;
-	 					// // console.log(menuItemPrice)
-	 					// // console.log(menuItemName)
-	 					var orderVal = {
-	 						"name": menuItemName,
-	 						"price": menuItemPrice,
-	 						"quantity": orderItem.quantity
+	 				var totalCost = 0;
+	 				var order = [];
+	 				// console.log(orderItems[0])
+	 				// console.log("order item id: "+orderItems[i].menuItemId)
+	 				// console.log("order quantity: "+orderItems[i].quantity)
+	 				// var orderItem = orderItems[i];
+	 				// console.log(orderItems)
+
+	 				var menuItemPrice;
+	 				var index = 0;
+	 				findMenuItem(index,totalCost,ordId,sOrder,customer);
+	 				function findMenuItem(index,totalCost,ordId,sOrder,customer){
+	 					// console.log("index: " + index + " length: " + orderItems.length)
+	 					if (orderItems.length == index) {
+	 						// console.log(order)
+	 						// console.log(sOrder)
+	 						return res.view("order/show",{
+	 							partials: {
+	 								head: '../partials/head',
+	 								tail: '../partials/tail',
+	 							},
+	 							title:"Order",
+	 							orderItems: order,
+	 							order: sOrder,
+	 							customer:customer,
+	 							totalCost : totalCost,
+	 							user: req.session.user
+	 						});
+
 	 					}
-	 					order.push(orderVal)
-	 					findMenuItem(index + 1,totalCost);
-	 				});
- 				} 			
+	 					var orderItem = orderItems[index];
+	 					// console.log(orderItem)
+	 					Menuitem.findOne({id:parseInt(orderItems[index].menuItemId)}, function (err,menuItem){
+	 						// console.log(index)
+		 					// console.log(err)
+		 					// console.log(menuItem)
+		 					// console.log(orderItem)
+		 					// console.log("quantity" + orderItems[index].quantity )
+		 					// console.log("price" + menuItem.price )
+		 					menuItemPrice = orderItem.quantity * menuItem.price;
+		 					totalCost = totalCost + menuItemPrice;
+		 					var menuItemName =  menuItem.name;
+		 					// // console.log(menuItemPrice)
+		 					// // console.log(menuItemName)
+		 					var orderVal = {
+		 						"name": menuItemName,
+		 						"price": menuItemPrice,
+		 						"quantity": orderItem.quantity
+		 					}
+		 					order.push(orderVal)
+		 					findMenuItem(index + 1,totalCost,ordId,sOrder,customer);
+		 				});
+	 				}
+ 				});
+
  			});
-},
-index : function  (req, res) {
-	return res.redirect("/orderstart");
-},
+
+ 		});
+	},
+	index : function  (req, res) {
+		return res.redirect("/orderstart");
+	},
 };
 

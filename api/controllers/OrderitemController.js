@@ -36,6 +36,7 @@
  					if (err) {
  						return res.json({err:"Cannot create"});
  					}			
+ 					orderItem["menuItemName"] = menuItem.name;
  					orderItem["cost"] = cost;
  					// console.log(orderItem)
  					return res.json(orderItem);

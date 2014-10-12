@@ -13,13 +13,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{#each order}}
+                    {{#each orderItems}}
                     <tr>
                         <td>{{name}}</td>
                         <td>{{quantity}}</td>
                         <td>$ {{price}}</td>
                     </tr>
                     {{/each}}
+                    {{customer}}
+                    {{!-- holds json  --}}
+                    {{!-- { nameFirst: 'asdad',
+                      nameLast: 'asdasd',
+                      phoneNo: '12345',
+                      addr: 'asdasd',
+                      cCardNo: '123213',
+                      cCardExpMon: '12',
+                      cCardExpYear: '12',
+                      cCardName: 'asdadas',
+                      createdAt: Sun Oct 12 2014 16:57:42 GMT+1000 (EST),
+                      updatedAt: Sun Oct 12 2014 16:57:42 GMT+1000 (EST),
+                      id: 1 }
+                     --}}
+                     {{order.paid}}
+                     {{!-- holds order  --}}
+                     {{!-- { customerId: 1,
+                          method: 'take-away',
+                          deliveryAddr: '',
+                          priceSum: 0,
+                          paid: false,
+                          createdAt: Sun Oct 12 2014 16:57:55 GMT+1000 (EST),
+                          updatedAt: Sun Oct 12 2014 16:57:55 GMT+1000 (EST),
+                          id: 1 } --}}
                 </tbody>
             </table>
         </div>

@@ -9,7 +9,22 @@ $(document).ready(function () {
     /* Order History button - redirect to page */
     $('#orderHistory').click(function() {
         console.log('Clicked - order history');
-        window.location.href = "/order/history?customerId=" + $('[name="customerId"]').val();
+        // window.location.href = "/order/history?customerId=" + $('[name="customerId"]').val();
+        console.log("User Id"+ $('[name="customerId"]').val())
+
+        socket.get("/order/history?customerId=" + $('[name="customerId"]').val() , function (response) { 
+            console.log(response);
+            
+            if (!jQuery.isEmptyObject(response.orders)) {
+                console.log("empty")
+                // order empty add whatever
+            } else {
+                console.log("not empty")
+                var nOrders = orders; // array of json objects 
+                var totalPrice = response.totalPrice; //adding the total price of objects
+            }
+        });
+
     });
     
     /* Select delivery method (take-away/home-delivery) */
