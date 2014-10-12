@@ -20,7 +20,7 @@ $(document).ready(function () {
                 // order empty add whatever
             } else {
                 console.log("not empty")
-                var nOrders = orders; // array of json objects 
+                var nOrders = response.orders; // array of json objects 
                 var totalPrice = response.totalPrice; //adding the total price of objects
             }
         });

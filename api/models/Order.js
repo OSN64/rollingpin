@@ -29,21 +29,11 @@ module.exports = {
         },
         // function to calculate the sum of the price
         addSum: function(cost) {
-            // var obj = .toObject();
-            console.log(this)
-
-            console.log(this.priceSum)
             this.priceSum = this.priceSum + cost;
-            console.log(this.priceSum)
             this.save( function(err,s){});
         },
         subSum: function(cost) {
-            // var obj = .toObject();
-            console.log(this)
-
-            console.log(this.priceSum)
             this.priceSum = this.priceSum - cost;
-            console.log(this.priceSum)
             this.save( function(err,s){});
         },
     },

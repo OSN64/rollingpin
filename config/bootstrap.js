@@ -31,10 +31,11 @@
 
     Menuitem.destroy().exec(console.log);
     Order.destroy().exec(console.log);
+    Orderitem.destroy().exec(console.log);
 
   }
 
-  seed();
+  // seed();
 
 
 
