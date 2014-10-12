@@ -31,13 +31,13 @@
 
     Menuitem.destroy().exec(console.log);
     Order.destroy().exec(console.log);
+    Orderitem.destroy().exec(console.log);
 
   }
 
   //seed();
 
-
-
+     
   Handlebars.registerHelper('listerr', function(context, options) {
     var ret = "";
     Object.keys(context).forEach(function(error){
