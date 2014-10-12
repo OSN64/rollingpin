@@ -22,6 +22,10 @@ a {
     padding-bottom: 1.5em;
 }
 
+.sideNote {
+    font-style: italic;
+}
+
 .btn-selected {
     /* Applied to toggle buttons on selection */
     background-color: #1E72B0;
@@ -193,6 +197,13 @@ small.text-muted {
 }
 
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
-    background-color: rgba(185, 37, 42, 0.8);
+    transition: all 0.5s;
+    background-color: rgba(85, 12, 65, 0.9);
     box-shadow: 0 2px 1em rgba(252, 67, 11, 0.8);
+}
+fieldset {
+    margin-top:2em;
+}
+legend {
+    margin-bottom:0.5em;
 }
