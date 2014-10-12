@@ -34,6 +34,7 @@
  				req.session.flash = {
  					err: err.ValidationError
  				}
+ 				console.log(err)
  				return res.redirect('/orderstart');
 
  			}			
@@ -60,6 +61,7 @@
  		Order.find(params, function(err, orders) {
  			if (err) {
  				console.log(err)
+ 				return res.json({err:"Order not found"})
  			}			
  			// console.log(orders)
  			var totalPrice = 0;	
@@ -80,5 +82,78 @@
  			});
  		});
  	},
- };
+ 	find : function  (req, res) {
+
+ 		var id = req.param('id');
+ 		if (!id) return res.json({err:"Id not found"});
+ 		// console.log(id)	
+ 		
+ 		Orderitem.find({orderId:parseInt(id)}, function(err, orderItems) {
+ 			function isEmpty(obj) {
+ 				return !Object.keys(obj).length > 0;
+ 			}
+ 			if (err || isEmpty(orderItems)) {
+ 				console.log(err)
+ 				return res.redirect('/orderstart');
+ 			}			
+ 			var totalCost = 0;
+ 			var order = [];
+ 			// console.log(orderItems[0])
+
+ 			// for(var i=0, j=orderItems.length; i<j; i++) {
+ 				// if (orders[i].priceSum !== undefined ) {
+ 				// 	totalPrice += orders[i].priceSum;
+ 				// };
+ 				// console.log("order item id: "+orderItems[i].menuItemId)
+ 				// console.log("order quantity: "+orderItems[i].quantity)
+ 				// var orderItem = orderItems[i];
+ 				// console.log(orderItems)
+ 				var menuItemPrice;
+ 				var index = 0;
+ 				findMenuItem(index,totalCost);
+ 				function findMenuItem(index,totalCost){
+ 					// console.log("index: " + index + " length: " + orderItems.length)
+ 					if (orderItems.length == index) {
+ 						console.log(order)
+ 						return res.view("order/show",{
+ 							partials: {
+ 								head: '../partials/head',
+ 								tail: '../partials/tail',
+ 							},
+ 							title:"Order",
+ 							order: order,
+ 							totalCost : totalCost,
+ 							user: req.session.user
+ 						});
+
+ 					};
+ 					var orderItem = orderItems[index];
+ 					console.log(orderItem)
+ 					Menuitem.findOne({id:parseInt(orderItems[index].menuItemId)}, function (err,menuItem){
+ 						console.log(index)
+	 					// console.log(err)
+	 					// console.log(menuItem)
+	 					// console.log(orderItem)
+	 					// console.log("quantity" + orderItems[index].quantity )
+	 					// console.log("price" + menuItem.price )
+	 					menuItemPrice = orderItem.quantity * menuItem.price;
+	 					totalCost = totalCost + menuItemPrice;
+	 					var menuItemName =  menuItem.name;
+	 					// // console.log(menuItemPrice)
+	 					// // console.log(menuItemName)
+	 					var orderVal = {
+	 						"name": menuItemName,
+	 						"price": menuItemPrice,
+	 						"quantity": orderItem.quantity
+	 					}
+	 					order.push(orderVal)
+	 					findMenuItem(index + 1,totalCost);
+	 				});
+ 				} 			
+ 			});
+},
+index : function  (req, res) {
+	return res.redirect("/orderstart");
+},
+};
 

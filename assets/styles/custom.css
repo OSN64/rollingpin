@@ -12,6 +12,25 @@ a {
     color:#222222;
 }
 
+#menuList {
+    min-height: 100px;
+    height: 85vh;
+    overflow-y: scroll;
+}
+#addItem {
+    
+    padding-bottom: 1.5em;
+}
+
+.btn-selected {
+    /* Applied to toggle buttons on selection */
+    background-color: #1E72B0;
+    transition: all 0.6s;
+    box-shadow: 0 3px 6px;
+    border:1px solid #000;
+    color: #fff;
+}
+
 .wrapper, .row {
     height: 100%;
     margin-left:0;
@@ -171,4 +190,9 @@ small.text-muted {
     border-color: #000;
     border-top-color: #606060;
     border-right-color: #606060;
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    background-color: rgba(185, 37, 42, 0.8);
+    box-shadow: 0 2px 1em rgba(252, 67, 11, 0.8);
 }
