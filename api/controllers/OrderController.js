@@ -34,6 +34,7 @@
  				req.session.flash = {
  					err: err.ValidationError
  				}
+ 				console.log(err)
  				return res.redirect('/orderstart');
 
  			}			
