@@ -60,6 +60,7 @@
  		Order.find(params, function(err, orders) {
  			if (err) {
  				console.log(err)
+ 				return res.json({err:"Order not found"})
  			}			
  			// console.log(orders)
  			var totalPrice = 0;	
@@ -80,5 +81,74 @@
  			});
  		});
  	},
- };
+ 	find : function  (req, res) {
+
+ 		var id = req.param('id');
+ 		if (!id) return res.json({err:"Id not found"});
+ 		// console.log(id)	
+ 		
+ 		Orderitem.find({orderId:parseInt(id)}, function(err, orderItems) {
+ 			function isEmpty(obj) {
+ 				return !Object.keys(obj).length > 0;
+ 			}
+ 			if (err || isEmpty(orderItems)) {
+ 				console.log(err)
+ 				return res.redirect('/orderstart');
+ 			}			
+ 			var totalCost;
+ 			var order = [];
+ 			// console.log(orderItems[0])
+
+ 			for(var i=0, j=orderItems.length; i<j; i++) {
+ 				// if (orders[i].priceSum !== undefined ) {
+ 				// 	totalPrice += orders[i].priceSum;
+ 				// };
+ 				console.log("order item id: "+orderItems[i].menuItemId)
+ 				console.log("order quantity: "+orderItems[i].quantity)
+ 				var orderItem = orderItems[i];
+ 				// console.log(orderItem)
+ 				var menuItemPrice;
+ 				Menuitem.findOne({id:parseInt(orderItems[i].menuItemId)}, function (err,menuItem){
+ 					console.log(i)
+ 					// console.log(err)
+ 					// console.log(menuItem)
+ 					// console.log(orderItem)
+ 					// console.log("quantity" + orderItems[i].quantity )
+ 					// console.log("price" + menuItem.price )
+ 					menuItemPrice = orderItem.quantity * menuItem.price;
+ 					var menuItemName =  menuItem.name;
+ 					// console.log(menuItemPrice)
+ 					// console.log(menuItemName)
+ 					var orderVal = {
+ 						"name": menuItemName,
+ 						"price": menuItemPrice
+ 					}
+ 					order.push(orderVal)
+ 					// console.log("i = " + i + " j = " +j)
+ 					// if (i=j) {
+ 					// 	console.log("finsh")
+ 					// 	// console.log(order)
+
+
+ 					// };
+ 				});
+ 				// console.log(i)
+ 				
+ 			}
+ 			return res.view("order/show",{
+ 				partials: {
+ 					head: '../partials/head',
+ 					tail: '../partials/tail',
+ 				},
+ 				title:"Order",
+ 				order: order,
+ 				user: req.session.user
+ 			});
+ 			
+ 		});
+},
+index : function  (req, res) {
+	return res.redirect("/orderstart");
+},
+};
 
