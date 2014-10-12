@@ -33,13 +33,13 @@ module.exports.menuItems = function (next) {
                 populate( (item + 1) );
               }
               else
-                return;
+                return next();
             });
           });
       
         }
         populate(0, function(){
-          return next();
+          next();
         });
       });
     });
@@ -54,30 +54,74 @@ module.exports.defaultUsers = function (next) {
   ]};
   User.destroy().exec(function(){
     function populate(list, item, cb){
-    var params = {};
-    params.name = list.users[item].name;
-    params.email = list.users[item].email;
-    params.password = list.users[item].password;
-    params.admin = list.users[item].admin;
-    params.pasConfirmation = list.users[item].password;
-    User.create(params, function(err, user) {
-      if (err) {
-        console.log( "err ----> " + JSON.stringify(err) );
-        return;
-      }
-      console.log("Added: " + user.name +
-        "\n\t User email: " + user.email +
-        "\n\t User password: " + user.password +
-        "\n\t User admin: " + user.admin );
-      if ( list.users.hasOwnProperty([ (item + 1) ]) ){
-        populate( list, item + 1, cb );
-      }
-      else
-        return;
+      var params = {};
+      params.name = list.users[item].name;
+      params.email = list.users[item].email;
+      params.password = list.users[item].password;
+      params.admin = list.users[item].admin;
+      params.pasConfirmation = list.users[item].password;
+      User.create(params, function(err, user) {
+        if (err) {
+          console.log( "err ----> " + JSON.stringify(err) );
+          return;
+        }
+        console.log("Added: " + user.name +
+          "\n\t User email: " + user.email +
+          "\n\t User password: " + user.password +
+          "\n\t User admin: " + user.admin );
+        if ( list.users.hasOwnProperty([ (item + 1) ]) ){
+          populate( list, item + 1, cb );
+        }
+        else
+          return next();
+      });
+    }
+    populate(list, 0, function(){
+      next();
     });
-  }
-  populate(list, 0, function(){
-    return next();
   });
-});
-}
+};
+
+
+module.exports.defaultCustomers = function (next) {
+
+  list = {customers: [
+    {nameFirst: "Adam", nameLast: "Miller", phoneNo: "0423086359", cCardNo: "4479656401333201",
+      cCardExpMon: "08", cCardExpYear: "2015", cCardName: "Adam Miller", addr: "45-47 Canal Lane, Lofthouse, Wakefield, West Yorkshire WF3 3HT, UK"},
+    {nameFirst: "Guy", nameLast: "Montgomery", phoneNo: "0423086358", cCardNo: "4539435433803053",
+      cCardExpMon: "08", cCardExpYear: "2015", cCardName: "Guy Montgomery", addr: "4 Winchfawr, Merthyr Tydfil, Merthyr Tydfil CF48, UK"},
+    {nameFirst: "Tim", nameLast: "Batt", phoneNo: "0423086357", cCardNo: "371903883311470",
+      cCardExpMon: "08", cCardExpYear: "2015", cCardName: "Tim Batt", addr: "36 Green Close, Renishaw, Sheffield, Derbyshire S21 3WS, UK"},
+  
+  ]};
+  Customer.destroy().exec(function(){
+    function populate(list, item, cb){
+      var params = {};
+      params.nameFirst = list.customers[item].nameFirst;
+      params.nameLast = list.customers[item].nameLast;
+      params.phoneNo = list.customers[item].phoneNo;
+      params.cCardNo = list.customers[item].cCardNo;
+      params.cCardExpMon = list.customers[item].cCardExpMon;
+      params.cCardExpYear = list.customers[item].cCardExpYear;
+      params.cCardName = list.customers[item].cCardName;
+      params.addr = list.customers[item].addr;
+
+      Customer.create(params, function(err, customer) {
+        if (err) {
+          console.log( "err ----> " + JSON.stringify(err) );
+          return;
+        }
+        console.log("Added: " + customer.cCardName +
+          "\n\t User Phone: " + customer.phoneNo );
+        if ( list.customers.hasOwnProperty([ (item + 1) ]) ){
+          populate( list, item + 1, cb );
+        }
+        else
+          return next();
+      });
+  }
+    populate(list, 0, function(){
+      next();
+    });
+  });
+};

@@ -1,5 +1,4 @@
 {{> head}}
-<div class="main">
     <h1 id="main-title">Customer Registration</h1>
     
         {{#if flash.err}}
@@ -10,7 +9,7 @@
         </ul><hr>
         {{/if}}
         
-        <div class="steps">
+
             <form action="/customer/create" method="post" accept-charset="utf-8">
                 
                 <div class="input-group">
@@ -30,28 +29,33 @@
                     <input type="text" name="addr" class="form-control">
                 </div>
                 
-                <hr>
-                
-                <div class="input-group">
-                    <span class="input-group-addon">Card Number</span>
-                    <input type="text" name="cCardNo" class="form-control">
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon">Expiry Date</span>
-                        <input type="text" name="cCardExpMon" class="form-control" placeholder="Month">
-                        <input type="text" name="cCardExpYear" class="form-control" placeholder="Year"> <!-- zxz Make these 2 inputs inline (side-by-side) -->
-                </div>
-                <div class="input-group">
-                    <span class="input-group-addon">Card Holder Name</span>
-                    <input type="text" name="cCardName" class="form-control">
-                </div>
+
+                <fieldset>
+                    <legend>Credit Card</legend>
+                    <p class="sideNote">Credit card details are optional and therefore the fields below are not required.</p>
+                    <div class="input-group">
+                        <span class="input-group-addon">Card Number</span>
+                        <input type="text" name="cCardNo" class="form-control">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Expiry Date</span>
+                            <input type="number" name="cCardExpMon" class="form-control" placeholder="Month - eg: 02">
+                            <input type="number" name="cCardExpYear" class="form-control" placeholder="Year - eg: 04"> <!-- zxz Make these 2 inputs inline (side-by-side) -->
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">Card Holder Name</span>
+                        <input type="text" name="cCardName" class="form-control" placeholder="Mr John Doe">
+                    </div>
+                    
+                </fieldset>
                 
                 <button type="submit" class="btn btn-default btn-lg btn-success">
                     <span class="glyphicon glyphicon-floppy-disk"></span> Create Customer
                 </button>
             </form>
-
-        </div>
-
-    </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('fieldset :input').attr('autocomplete', 'off'); /* disable auto-complete on credit-card input fields */
+    });
+</script>
 {{> tail}}
