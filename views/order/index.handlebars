@@ -1,7 +1,7 @@
 {{> head}}
 <div class="main">
     <h1 id="main-title">New Order</h1>
-    <p>Enter the customer's phone number to locate their customer profile.</p>
+    <p id="main-info">Enter the customer's phone number to locate their customer profile.</p>
 
     {{#if flash.err}}
     <ul class="alert alert-warning">
@@ -28,18 +28,35 @@
         {{!-- find phone no if not exist change page to register user --}}
         {{!-- window.location.href = "/customer/register"; --}}
 
-        {{!-- if exist store cusid  --}}
+        {{!-- if exist store cusID  --}}
         <form id="formOrderMeth" action="/order/create" method="post" accept-charset="utf-8">
             {{!-- javascript putt this after getting cusid --}}
             <input type="hidden" name="customerId" value="">
 
             <label>Order Method</label>
+            
+            <div class="btn-group">
+                <button type="button" class="btn-toggle btn btn-default btn-selected">Take-away</button>
+                <button type="button" class="btn-toggle btn btn-default">Home-delivery</button>
+            </div> <input type="hidden" name="method" value="">
+            
+            <div class="input-group" style="display: none;">
+                <span class="input-group-addon">Delivery Address</span>
+                <input type="text" name="deliveryAddr" class="form-control">
+            </div>
+            
+            <button type="submit" class="btn btn-default btn-lg btn-success">
+                <span class="glyphicon glyphicon-shopping-cart"></span> Order Now
+            </button>
+            
+            <!--
             <select name="method">
                 <option value="take-away">take-away</option>
                 <option value="home-delivery">home-delivery</option>
             </select>
             <input type="text" name="deliveryAddr" placeholder="eg 23 road">
             <input type="submit" name="submit" value="Order Now">
+            -->
         </form>
         {{!-- for order history send a web socket to /order?cusid --}}
         <a id="orderHistory" href="">Order History</a>

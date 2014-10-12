@@ -81,7 +81,7 @@
     // Menuitem.create({name:'wer', price:'45',description:'asd'}, function(err, menuitem) {console.log(menuitem)});
 }
 
-   seed();
+   //seed();
 
 
   Handlebars.registerHelper('listerr', function(context, options) {
