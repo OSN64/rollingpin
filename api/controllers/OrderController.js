@@ -141,13 +141,7 @@
 	 					var orderItem = orderItems[index];
 	 					// console.log(orderItem)
 	 					Menuitem.findOne({id:parseInt(orderItems[index].menuItemId)}, function (err,menuItem){
-	 						// console.log(index)
-		 					// console.log(err)
-		 					// console.log(menuItem)
-		 					// console.log(orderItem)
-		 					// console.log("quantity" + orderItems[index].quantity )
-		 					// console.log("price" + menuItem.price )
-		 					menuItemPrice = orderItem.quantity * menuItem.price;
+	 						menuItemPrice = orderItem.quantity * menuItem.price;
 		 					totalCost = totalCost + menuItemPrice;
 		 					var menuItemName =  menuItem.name;
 		 					// // console.log(menuItemPrice)
