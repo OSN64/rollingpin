@@ -6,26 +6,24 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        {{!-- <th>#</th> --}}
                         <th>Item name</th>
                         <th>Quantity</th>
                         <th>Cost</th>
                     </tr>
                 </thead>
                 <tbody>
-                   {{!--  {{#each orders}}
+                    {{#each order}}
                     <tr>
-                        <td>{{id}}</td>
-                        <td>{{method}}</td>
-                        <td>{{deliveryAddr}}</td>
-                        <td>{{createdAt}}</td>
-                        <td>$ {{priceSum}}</td>
+                        <td>{{name}}</td>
+                        <td>{{quantity}}</td>
+                        <td>$ {{price}}</td>
                     </tr>
-                    {{/each}} --}}
+                    {{/each}}
                 </tbody>
             </table>
         </div>
-        <h3>Total price: $ {{!-- {{totalPrice}} --}} </h3>
+        <h3>Total price: $ {{totalCost}} </h3>
     </div>
 </div> <!-- /.main -->
 
