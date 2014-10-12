@@ -29,7 +29,7 @@
     Order.destroy().exec(console.log);
     Customer.destroy().exec(console.log);
 }
-   //seed();
+   // seed();
 
 
   Handlebars.registerHelper('listerr', function(context, options) {
