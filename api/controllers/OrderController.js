@@ -89,7 +89,10 @@
  	find : function  (req, res) {
 
  		var ordId = req.param('id');
- 		if (!ordId) return res.json({err:"Id not found"});
+ 		if (!ordId) {
+ 			console.log("Id not found")
+ 			return res.redirect("/orderstart");
+ 		};
  		// console.log(id)	
  		ordId = parseInt(ordId);
  		Orderitem.find({orderId:ordId}, function(err, orderItems) {
@@ -106,24 +109,18 @@
  				// console.log(sOrder)
  				Customer.findOne({id:parseInt(sOrder.customerId)}, function(err, customer) {
  					if (err) console.log(err);
- 					// console.log(customer)
 
 	 				var totalCost = 0;
 	 				var order = [];
-	 				// console.log(orderItems[0])
-	 				// console.log("order item id: "+orderItems[i].menuItemId)
-	 				// console.log("order quantity: "+orderItems[i].quantity)
-	 				// var orderItem = orderItems[i];
-	 				// console.log(orderItems)
-
 	 				var menuItemPrice;
 	 				var index = 0;
+
 	 				findMenuItem(index,totalCost,ordId,sOrder,customer);
+
 	 				function findMenuItem(index,totalCost,ordId,sOrder,customer){
 	 					// console.log("index: " + index + " length: " + orderItems.length)
 	 					if (orderItems.length == index) {
-	 						// console.log(order)
-	 						// console.log(sOrder)
+
 	 						return res.view("order/show",{
 	 							partials: {
 	 								head: '../partials/head',
@@ -144,8 +141,7 @@
 	 						menuItemPrice = orderItem.quantity * menuItem.price;
 		 					totalCost = totalCost + menuItemPrice;
 		 					var menuItemName =  menuItem.name;
-		 					// // console.log(menuItemPrice)
-		 					// // console.log(menuItemName)
+		 					
 		 					var orderVal = {
 		 						"name": menuItemName,
 		 						"price": menuItemPrice,
