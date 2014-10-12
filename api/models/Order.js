@@ -22,7 +22,6 @@ module.exports = {
 		},
 		deliveryAddr: {
 			type: "string",
-            required: true
         },
         // function to calculate the sum of the price
         addSum: function(cost) {

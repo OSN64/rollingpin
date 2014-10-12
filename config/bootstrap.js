@@ -27,11 +27,14 @@
 
     Menuitem.destroy().exec(console.log);
     Order.destroy().exec(console.log);
+<<<<<<< HEAD
     //Customer.destroy().exec(console.log);
 
+=======
+    Customer.destroy().exec(console.log);
+>>>>>>> e2d7449fade70976bf84db4c251e29e189060157
 }
-
-   //seed();
+   // seed();
 
 
   Handlebars.registerHelper('listerr', function(context, options) {
