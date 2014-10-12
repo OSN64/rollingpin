@@ -15,7 +15,7 @@ $(document).ready(function () {
            
             if (jQuery.isEmptyObject(response)) {
             //if (typeof response.err !== "undefined") {
-                    console.log(response.err)
+                    console.log('Object is empty!: '+response.err)
                 } else {
                     console.log(response); 
                     
@@ -52,16 +52,21 @@ $(document).ready(function () {
     
     /* Delete specific item from ordered list */
     $('#orderList').on('click','.del', function(e) {
-            e.preventDefault();
-        
-            var delId = $(this).data('datac');
-            socket.delete("/orderitem/"+delId, function (response){
-                console.log(response)
-                if (typeof response.err !== "undefined") {
-                    console.log(response.err)
-                }else{
-                    $('#orderList #'+ delId).remove();                    
-                }
-            });
+    //$('.del').click(function(e) {
+        console.log("Delete button pressed.");
+        e.preventDefault();
+
+        var delId = $(this).data('datac');
+        var parentRow = $(this).parent().parent();
+
+        socket.delete("/orderitem/" + delId, function (response) {
+            if (typeof response.err !== "undefined") {
+                console.log('ERROR: '+response.err)
+            } else {          
+                parentRow.remove();
+            }
         });
+        
+    });
+    
 }); //ready()
