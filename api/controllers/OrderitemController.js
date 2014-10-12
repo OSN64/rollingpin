@@ -34,6 +34,7 @@
  				order.addSum(cost);
  				Orderitem.create(params, function(err, orderItem) {
  					if (err) {
+ 						console.log(err)
  						return res.json({err:"Cannot create"});
  					}			
  					orderItem["menuItemName"] = menuItem.name;
