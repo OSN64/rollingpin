@@ -13,17 +13,17 @@ $(document).ready(function () {
 
         socket.get("/orderitem/create?" + $('#addItem').serialize(), function (response) {
            
-            if (jQuery.isEmptyObject(response)) {
-            //if (typeof response.err !== "undefined") {
+            //if (jQuery.isEmptyObject(response)) {
+            if (typeof response.err !== "undefined") {
                     console.log('Object is empty!: '+response.err)
                 } else {
-                    console.log(response); 
+                    console.log('Reply: '+response); 
                     
                     $('#orderTable > tbody').append('<tr>' + 
                                                     '<td>'+response.quantity+'</td>' + 
                                                     '<td><small>('+response.menuItemId+')</small> '+response.menuItemName+'</td>' + 
-                                                    '<td>'+response.cost+'</td>' + 
-                                                    '<td><a class="btn btn-danger del" data-datac='+ response.id+ '><span class="glyphicon glyphicon-remove"></span></td>' + 
+                                                    '<td>$ '+response.cost+'</td>' + 
+                                                    '<td><a class="btn-sm btn-danger del" data-datac='+ response.id+ '><span class="glyphicon glyphicon-remove"></span></td>' + 
                                                     '</tr>'
                                                    ).hide().fadeIn('fast');
                                                     
@@ -62,8 +62,10 @@ $(document).ready(function () {
         socket.delete("/orderitem/" + delId, function (response) {
             if (typeof response.err !== "undefined") {
                 console.log('ERROR: '+response.err)
-            } else {          
-                parentRow.remove();
+            } else {
+                parentRow.fadeOut('slow', function() { // fade-out && delete parent row
+                    parentRow.remove();
+                });
             }
         });
         

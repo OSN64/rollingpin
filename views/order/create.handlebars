@@ -52,10 +52,10 @@
             <input type="hidden" name="orderId" value="{{order.id}}" required>
             
             <label>Item: </label>
-            <input type="number" id="itemIdInput" name="menuItemId" placeholder="#" required>
+            <input type="number" id="itemIdInput" name="menuItemId" placeholder="#" min="0" required>
             
             <label>Quantity:</label>
-            <input type="number" id="itemQtyInput" name="quantity" placeholder="3" value="1" required>
+            <input type="number" id="itemQtyInput" name="quantity" placeholder="3" value="1" min="1" required>
             
             <button type="submit" class="btn btn-default btn-sm btn-info">
                 <span class="glyphicon glyphicon-plus"></span> Add

@@ -12,6 +12,17 @@ a {
     color:#222222;
 }
 
+.del {
+    margin: 0 !important;
+}
+.del:hover {
+    cursor: pointer;
+}
+
+#menuList > table > tbody > tr:hover {
+    cursor: copy;
+}
+
 #menuList {
     min-height: 100px;
     height: 85vh;
@@ -23,7 +34,6 @@ a {
 }
 
 #addItem {
-    
     padding-bottom: 1.5em;
 }
 
