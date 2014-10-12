@@ -10,7 +10,6 @@
  var Handlebars = require('handlebars');
  module.exports.bootstrap = function (cb) {
   var populate = require('./populate/populate.js');
-
   //set seed values here
   function seed () {
     
@@ -22,14 +21,21 @@
       Counter.create({amount:'0', model_name:'Customer'}).exec(console.log);
     });
 
-    populate.menuItems();
-    populate.defaultUsers();
+    populate.menuItems(function(){
+      populate.defaultUsers(function(){
+        populate.defaultCustomers(function(){
+          console.log("Done populateing");
+        });
+      });
+    });
 
     Menuitem.destroy().exec(console.log);
     Order.destroy().exec(console.log);
-    //Customer.destroy().exec(console.log);
-}
-   // seed();
+
+  }
+
+  seed();
+
 
 
   Handlebars.registerHelper('listerr', function(context, options) {
