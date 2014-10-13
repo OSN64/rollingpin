@@ -10,11 +10,8 @@ $(document).ready(function () {
     //$('#orderHistory').click(function() {
     function getHistory() {
         console.log('[*] Fetching order history..');
-        // window.location.href = "/order/history?customerId=" + $('[name="customerId"]').val();
-        //console.log("User Id"+ $('[name="customerId"]').val())
 
         socket.get("/order/history?customerId=" + $('[name="customerId"]').val() , function (response) {
-            //console.log(response);
             
             if (jQuery.isEmptyObject(response.orders)) {
             //if (typeof response.err !== "undefined") {
