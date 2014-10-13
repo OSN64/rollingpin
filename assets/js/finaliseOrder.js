@@ -35,16 +35,7 @@ $(document).ready(function() {
             frame.fadeIn(1200);
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     /* -------------------- [ NOTHING SPECIAL BELOW ] --------------------  */
     
