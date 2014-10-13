@@ -58,7 +58,7 @@
 </div>
 {{#unless order.paid}}
 {{!-- if order is not paid show this --}}
-    <div class="col-sm-6">
+    <div id="paymentWrapper" class="col-sm-6">
         <div id="framePayMethod">
             <b>Please select a payment method.</b>
             <div class="text-center">
@@ -71,20 +71,45 @@
             </div>
         </div>
         
-        <div id="frameCardForm" style="display: none;">card...zxz</div>
-        <div id="frameCashForm" style="display: none;">
-            cash...zxz...
-            <button id="cashPaid" type="button" class="btn btn-default btn-lg btn-info">
-                <span class="glyphicon glyphicon-ok"></span> Mark as paid
+        <div id="frameCardForm" style="display: none;" class="text-center">
+            
+                <b>Complete the following form to charge the customer's credit card for the entire total price.</b>
+                <div class="input-group">
+                    <span class="input-group-addon">Card Number</span>
+                    <input type="text" name="cCardNo" class="form-control" value="{{customer.cCardNo}}">
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Expiry Date</span>
+                    <input type="number" name="cCardExpMon" class="form-control" min="01" max="12" placeholder="Month - eg: 02" value="{{customer.cCardExpMon}}">
+                    <input type="number" name="cCardExpYear" class="form-control" min="00" max="99" placeholder="Year - eg: 04" value="{{customer.cCardExpYear}}"> <!-- zxz -->
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon">Card Holder Name</span>
+                    <input type="text" name="cCardName" class="form-control" placeholder="Mr John Doe" value="{{customer.cCardName}}">
+                </div>
+
+            <button id="cardPaid" type="button" class="btn btn-default btn-lg btn-success" itemref="#frameOrderPaid">
+                <span class="glyphicon glyphicon-credit-card"></span> Charge Credit Card
             </button>
             
-            <a class="btn btn-default btn-lg btn-info" href="/order/setPaid?id=9&paid=true" title="">Mark as paid</a>
-                
-        </div>    
+        </div>
+        
+        <div id="frameCashForm" style="display: none;" class="text-center">
+            <b>Once payment has been made click the following button to mark the order as paid.</b>
+            <button id="cashPaid" type="button" class="btn btn-default btn-lg btn-success" itemref="#frameOrderPaid">
+                <span class="glyphicon glyphicon-ok"></span> Mark as paid
+            </button>
+        </div>
+        
+        <div id="frameOrderPaid" style="display: none;" class="text-center">
+            <h3 class="text-success">Payment has been approved, the order is now complete!</h3>
+            
+        </div>
+        
     </div>
 {{/unless}}
-
-
 <input id="orderID" type="hidden" value="{{order.id}}">
+
+
 <script type="text/javascript" src="/js/finaliseOrder.js"></script>
 {{> tail}}

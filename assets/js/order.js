@@ -28,7 +28,7 @@ $(document).ready(function () {
                                                     '<td>'+response.quantity+'</td>' + 
                                                     '<td><small>('+response.menuItemId+')</small> '+response.menuItemName+'</td>' + 
                                                     '<td>$ '+response.cost+'</td>' + 
-                                                    '<td><a class="btn-sm btn-danger del" data-datac='+ response.id+ '><span class="glyphicon glyphicon-remove"></span></td>' + 
+                                                    '<td><a class="btn-sm btn-danger del" data-datac='+ response.id+ '><span class="glyphicon glyphicon-remove"></span></a></td>' + 
                                                     '</tr>'
                                                    ).hide().fadeIn('fast');
                                                     
