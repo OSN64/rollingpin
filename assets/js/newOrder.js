@@ -21,15 +21,15 @@ $(document).ready(function () {
                 console.log('Object is empty!: '+response.err)
             } else {
                 console.log("[*] not empty...");
-                console.log(response);
+                
+                $('#orderTable').slideDown(1500);
+                
                 var nOrders = response.orders; // array of json objects 
-                var totalPrice = response.totalPrice; //adding the total price of objects
+                var totalPrice = response.totalPrice; // Total price of ALL objects
                 
                 nOrders.forEach(function(e) {
-                    
-                    console.log('[*] method= '+e.method);
-                    
-                    $('#orderTable > tbody').append('<tr class="cursor-pointer">' + 
+
+                    $('#orderTable > table > tbody').append('<tr class="cursor-pointer">' + 
                                                     '<td>'+e.id+'</td>' + 
                                                     '<td>'+e.method+'</td>' + 
                                                     '<td>'+e.deliveryAddr+'</td>' + 
@@ -43,6 +43,17 @@ $(document).ready(function () {
         });
 
     };
+    
+    //$('#orderList').on('click','.del', function(e) {
+    $('#orderTable').on('click', '.cursor-pointer', function(e) {
+        //console.log("[+] row clicked!!!!!!");
+        //console.log("[+] cell=" + $(this).closest('tr').children('td.one').get() );
+        
+        var clickedAddr = $(this).find('td:eq(2)').html();
+        $('[name="deliveryAddr"]').val(clickedAddr).focus()
+        
+        console.log("[+] cell=" + clickedAddr );
+    });
     
     /* Select delivery method (take-away/home-delivery) */
     $('.btn-toggle').click(function() {
@@ -69,7 +80,7 @@ $(document).ready(function () {
     $('#phoneEnter').submit(function(e) {
         e.preventDefault();
         
-        $("#main-info").text('Select the delivery method and address.');
+        $("#main-info").text('Select the delivery method and address. You can also select the address from a previous order by clicking an address from the Order History shown below.');
         
         var phone = $('[name="phNo"]').val();
         
