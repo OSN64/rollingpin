@@ -1,61 +1,87 @@
 {{> head}}
-<div class="main">
-    <h1>Search Orders</h1>
+<h1>Search Orders</h1>
 
-    <div class="steps"> 
-        <form action="" method="get" accept-charset="utf-8">
-            <label>Customer No</label>
-            <input type="number" name="customerId" placeholder="1">
-            <label>Order Status</label>
-            <select name="paid">
-                <option value="">All</option>
-                <option value="true">Paid</option>
-                <option value="false">Not Paid</option>            
-            </select>
-            <input type="submit" name="submit" value="Search">
-        </form>
-
-
-        {{#if orders}}
-        <div class="panel panel-default">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Method</th>
-                        <th>Delivery Address</th>
-                        <th>Created At</th>
-                        <th>Order price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each orders}}
-                        <tr>
-                           {{!-- <a href="/order/1" title="asd">asa</a> --}}
-                           {{!-- id = 1 --}}
-                           {{!-- for each row add a link or button to each order --}}
-                            {{!-- like --}}
-
-                           <td><a href="/order/{{id}}" class="btn btn-success">{{id}}</a></td>
-                           <td>{{method}}</td>
-                           <td>{{deliveryAddr}}</td>
-                           <td>{{createdAt}}</td>
-                           <td>$ {{priceSum}}</td>
-                           <td>{{#if paid}}
-                            Paid
-                            {{else}}
-                            Unpaid
-                            {{/if}}
-                        </td>
-                        </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+<form action="" method="get" accept-charset="utf-8">
+    <p>The form below allows you to search previous orders based on your criteria. <b>Customer's Phone #</b> is optional.</p>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    Customer Phone #
+                </span>
+                <input type="text" class="form-control">
+            </div>
         </div>
-    {{else}}
-    <h3>No Orders</h3>
-    {{/if}}
-    </div>
-</div> <!-- /.main -->
+        
+        <div class="col-lg-4">
+            <div class="input-group">
+                <label>Order Status </label>
+                <div class="btn-group">
+                    <button type="button" class="btn-toggle btn btn-default del" data-datac="true">Paid</button>
+                    <button type="button" class="btn-toggle btn btn-default del btn-selected" data-datac="">All</button>
+                    <button type="button" class="btn-toggle btn btn-default del" data-datac="false">Not Paid</button>
+                </div>
+                <input type="hidden" name="paid" value="">
+                
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <button type="submit" class="btn btn-default btn-sm btn-info del">
+                <span class="glyphicon glyphicon-search"></span> Search
+            </button>
+        </div>
+        
+    </div><!-- /.row -->
+</form>
+
+<hr>
+
+{{#if orders}}
+<div id="searchMenuList" class="panel panel-default">
+    <table class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Order Type</th>
+                <th>Delivery Address</th>
+                <th>Total Price</th>
+                <th>Created At</th>
+                <th>Status</th>
+                <th> </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each orders}}
+                <tr>
+                   {{!-- <a href="/order/1" title="asd">asa</a> --}}
+                   {{!-- id = 1 --}}
+                   {{!-- for each row add a link or button to each order --}}
+                    {{!-- like --}}
+
+                   <td>{{id}}</td>
+                   <td>{{method}}</td>
+                   <td>{{deliveryAddr}}</td>
+                   <td>$ {{priceSum}}</td>
+                   <td>{{createdAt}}</td>
+                   <td>{{#if paid}}
+                        Paid
+                    {{else}}
+                        Unpaid
+                    {{/if}}
+                    </td>
+                    <td>
+                        <a class="btn-sm btn-success del" data-datac='{{id}}' href="/order/{{id}}"><span class="glyphicon glyphicon-eye-open"></span> View</a>
+                        <!--<a class="btn-sm btn-danger del" data-datac='{{id}}' href="/order/{{id}}"><span class="glyphicon glyphicon-remove"></span></a>-->
+                    </td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{else}}
+<h3>No Orders</h3>
+{{/if}}
+
+<script type="text/javascript" src="/js/searchOrder.js"></script>
 {{> tail}}

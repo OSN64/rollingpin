@@ -1,30 +1,52 @@
 $(document).ready(function() {
-
-    $('#cashPaid').click(function() {
-        var orderID = $('#orderID').val();
-        console.log("Marking as paid: "+ orderID );
+    
+    /* Mark given orderID as paid */
+    function markAsPaid(orderID) {
+        console.log("[*] Marking as paid, orderID: "+orderID);
+        socket.get("/order/setPaid?id="+ orderID +"&paid=true", function (response) { /* Bleh zxz */ });
         
-        //socket.get("/order/setPaid?id="+ orderID +"&paid=true", function (response) { }
+        //showPaymentForm("#frameOrderPaid");
+    }
+    
+    /* Buttons that process payment && mark order as paid */
+    $('#cashPaid').click(function(e) {
+        markAsPaid($('#orderID').val());
+    });
+    $('#cardPaid').click(function(e) {
+        markAsPaid($('#orderID').val());
     });
     
+    /* Switch frames */
     $('.btn').click(function() {
         var self = $(this);
-        console.log('btn pressed...');
+        console.log('[*] btn pressed.');
         
         if ( $(this).is("[itemref]") ) {
-            console.log('** itemref found! **');
+            console.log(' `-> * itemref found *');
             var itemVal = $(this).attr('itemref');
         
             showPaymentForm($(itemVal) );
         }
     });
     
+    /* Show specific frame, based on given parameter */
     function showPaymentForm(frame) {
-        console.log('Running showPaymentForm.');
-        $('#framePayMethod').fadeOut(1000, function() {
-            frame.fadeIn('fast');
-        });
+        $('#paymentWrapper').children().hide();
+            frame.fadeIn(1200);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    /* -------------------- [ NOTHING SPECIAL BELOW ] --------------------  */
     
     /* YOLO foo zxz fizzle */
     var rotation = 0;

@@ -12,6 +12,12 @@ a {
     color:#222222;
 }
 
+.btn-group > .btn {
+    margin: 0 !important;
+    padding-left: 2em !important;
+    padding-right: 2em !important;
+}
+
 .del {
     margin: 0 !important;
 }
@@ -21,6 +27,12 @@ a {
 
 #menuList > table > tbody > tr:hover {
     cursor: copy;
+}
+
+#searchMenuList {
+    min-height: 100px;
+    height: 75vh;
+    overflow-y: scroll;
 }
 
 #menuList {
