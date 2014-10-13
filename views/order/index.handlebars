@@ -1,68 +1,78 @@
 {{> head}}
-    <h1 id="main-title">New Order</h1>
-    <p id="main-info">Enter the customer's phone number to locate their customer profile.</p>
+<h1 id="main-title">New Order</h1>
+<p id="main-info">Enter the customer's phone number to locate their customer profile.</p>
 
-    {{#if flash.err}}
-    <ul class="alert alert-warning">
-        {{#list flash.err}}
-            is {{rule}}
-        {{/list}}
-    </ul>
-    <hr>
-    {{/if}}
+{{#if flash.err}}
+<ul class="alert alert-warning">
+    {{#list flash.err}}
+        is {{rule}}
+    {{/list}}
+</ul>
+<hr>
+{{/if}}
 
+
+<form id="phoneEnter" accept-charset="utf-8">
+    <div class="input-group">
+        <span class="input-group-addon">Phone #</span>
+        <input type="text" name="phNo" class="form-control" placeholder="eg 5517 9000" value="{{#if phNo}}{{phNo}}{{/if}}">
+    </div>
+
+    <button type="submit" class="btn btn-default btn-lg btn-success">
+        <span class="glyphicon glyphicon-search"></span> Search
+    </button>
+</form>
+
+<form id="formOrderMeth" action="/order/create" method="post" accept-charset="utf-8">
+    <input type="hidden" name="customerId" value="">
+
+    <label>Order Method</label>
+
+    <div class="btn-group">
+        <button type="button" class="btn-toggle btn btn-default btn-selected">Take-away</button>
+        <button type="button" class="btn-toggle btn btn-default" itemref="addressInput">Home-delivery</button>
+    </div> <input type="hidden" name="method" value="">
+
+    <div id="ref-group">
+        <div id="addressInput" class="input-group" style="display: none; margin-top:1em;">
+            <span class="input-group-addon">Delivery Address</span>
+            <input type="text" name="deliveryAddr" class="form-control">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-default btn-lg btn-success">
+        <span class="glyphicon glyphicon-shopping-cart"></span> Order Now
+    </button>
+    <!--
+    <button id="orderHistory" type="button" class="btn btn-default btn-lg btn-warning">
+        <span class="glyphicon glyphicon-book"></span> Order History
+    </button>
     
-        <form id="phoneEnter" accept-charset="utf-8">
-            <div class="input-group">
-                <span class="input-group-addon">Phone #</span>
-                <input type="text" name="phNo" class="form-control" placeholder="eg 5517 9000" value="{{#if phNo}}{{phNo}}{{/if}}">
-            </div>
-            
-            <button type="submit" class="btn btn-default btn-lg btn-success">
-                <span class="glyphicon glyphicon-search"></span> Search
-            </button>
-        </form>
+    <select name="method">
+        <option value="take-away">take-away</option>
+        <option value="home-delivery">home-delivery</option>
+    </select>
+    <label>Delivery</label>
+    <input type="text" name="deliveryAddr" placeholder="eg 23 road">
+    <input type="submit" name="submit" value="Order Now">
 
-        {{!-- find phone no if not exist change page to register user --}}
-        {{!-- window.location.href = "/customer/register"; --}}
+    <a id="orderHistory" href="">Order History</a>
+    -->
+</form>
 
-        {{!-- if exist store cusID  --}}
-        <form id="formOrderMeth" action="/order/create" method="post" accept-charset="utf-8">
-            {{!-- javascript putt this after getting cusid --}}
-            <input type="hidden" name="customerId" value="">
-
-            <label>Order Method</label>
-            
-            <div class="btn-group">
-                <button type="button" class="btn-toggle btn btn-default btn-selected">Take-away</button>
-                <button type="button" class="btn-toggle btn btn-default" itemref="addressInput">Home-delivery</button>
-            </div> <input type="hidden" name="method" value="">
-            
-            <div id="ref-group">
-                <div id="addressInput" class="input-group" style="display: none;">
-                    <span class="input-group-addon">Delivery Address</span>
-                    <input type="text" name="deliveryAddr" class="form-control">
-                </div>
-            </div>
-            
-            <button type="submit" class="btn btn-default btn-lg btn-success">
-                <span class="glyphicon glyphicon-shopping-cart"></span> Order Now
-            </button>
-            <button id="orderHistory" type="button" class="btn btn-default btn-lg btn-warning">
-                <span class="glyphicon glyphicon-book"></span> Order History
-            </button>
-            <!--
-            <select name="method">
-                <option value="take-away">take-away</option>
-                <option value="home-delivery">home-delivery</option>
-            </select>
-            <label>Delivery</label>
-            <input type="text" name="deliveryAddr" placeholder="eg 23 road">
-            <input type="submit" name="submit" value="Order Now">
-
-            <a id="orderHistory" href="">Order History</a>
-            -->
-        </form>
-
+<div class="panel panel-default zxz-hide">
+    <table id="orderTable" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Order Type</th>
+                <th>Delivery Address</th>
+                <th>Total Price</th>
+                <th>Created At</th>
+            </tr>
+        </thead>
+        <tbody id="orderList"><!-- Items go here ^_^ --></tbody>
+    </table>
+</div>
 <script type="text/javascript" src="/js/newOrder.js"></script>
 {{> tail}}

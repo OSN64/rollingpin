@@ -7,25 +7,42 @@ $(document).ready(function () {
     $('[name="method"]').val( $('.btn-selected').text().toLowerCase() ); // store the selected value
     
     /* Order History button - redirect to page */
-    $('#orderHistory').click(function() {
-        console.log('Clicked - order history');
+    //$('#orderHistory').click(function() {
+    function getHistory() {
+        console.log('[*] Fetching order history..');
         // window.location.href = "/order/history?customerId=" + $('[name="customerId"]').val();
-        console.log("User Id"+ $('[name="customerId"]').val())
+        //console.log("User Id"+ $('[name="customerId"]').val())
 
-        socket.get("/order/history?customerId=" + $('[name="customerId"]').val() , function (response) { 
-            console.log(response);
+        socket.get("/order/history?customerId=" + $('[name="customerId"]').val() , function (response) {
+            //console.log(response);
             
-            if (jQuery.isEmptyObject(response.orders)) {
-                console.log("empty")
-                // order empty add whatever
+            //if (jQuery.isEmptyObject(response.orders)) {
+            if (typeof response.err !== "undefined") {
+                console.log('Object is empty!: '+response.err)
             } else {
-                console.log("not empty")
+                console.log("[*] not empty...");
+                console.log(response);
                 var nOrders = response.orders; // array of json objects 
                 var totalPrice = response.totalPrice; //adding the total price of objects
+                
+                nOrders.forEach(function(e) {
+                    
+                    console.log('[*] method= '+e.method);
+                    
+                    $('#orderTable > tbody').append('<tr class="cursor-pointer">' + 
+                                                    '<td>'+e.id+'</td>' + 
+                                                    '<td>'+e.method+'</td>' + 
+                                                    '<td>'+e.deliveryAddr+'</td>' + 
+                                                    '<td>'+e.priceSum+'</td>' + 
+                                                    '<td>'+e.createdAt+'</td>' + 
+                                                    '</tr>'
+                                                   ).hide().fadeIn('fast');
+                });
+                
             }
         });
 
-    });
+    };
     
     /* Select delivery method (take-away/home-delivery) */
     $('.btn-toggle').click(function() {
@@ -67,6 +84,8 @@ $(document).ready(function () {
                 $('#phoneEnter').hide('slow');
                 $('#formOrderMeth').show('slow');
                 $('#orderHistory').show('slow');
+                
+                getHistory(); // show customer's order history
             }
         });
     });

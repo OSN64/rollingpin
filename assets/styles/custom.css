@@ -21,7 +21,7 @@ a {
 .del {
     margin: 0 !important;
 }
-.del:hover {
+.del:hover, .cursor-pointer {
     cursor: pointer;
 }
 
@@ -41,7 +41,7 @@ a {
     overflow-y: scroll;
 }
 #orderTable {
-    /*height: 50vh;*/
+    height: 50vh;
     overflow-y: scroll;
 }
 
