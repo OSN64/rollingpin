@@ -195,27 +195,43 @@
  		if (params.paid){ 
  			params.paid = JSON.parse(params.paid);
  		}else delete params.paid;
- 		if(params.customerId){ 				
- 			params.customerId = parseInt(params.customerId) 
- 		}else delete params.customerId;
-
- 		console.log(params)
- 		Order.find(params, function(err, orders) {
- 			if (err) {
- 				console.log(err)
- 				return res.json({err:"Order not found"})
+ 		if(params.customerPhoneNo){ 
+ 			params["customerId"] = 0;				
+ 			params.customerPhoneNo = params.customerPhoneNo.toString();
+ 		}else delete params.customerPhoneNo;
+ 		console.log("find customer with phNo of: " + params.customerPhoneNo)
+ 		Customer.find({phoneNo:params.customerPhoneNo},function(err,customer){
+ 			function isEmpty(obj) {
+ 				return !Object.keys(obj).length > 0;
  			}
- 			// console.log(orders)
-			return res.view("order/search",{
-				partials: {
-					head: '../partials/head',
-					tail: '../partials/tail',
-				},
-				title:"Search Order",
-				orders:orders,
-				user:req.session.user
-			});
+ 			console.log("customer is empty = " + isEmpty(customer))
+ 			// console.log(customer)
+ 			console.log(customer.length)
+ 			if (customer && !isEmpty(customer)) {
+  				console.log("sustomer founcd id: ")
+ 				console.log(customer)
+ 				params["customerId"] = customer[0].id;
+ 			} 				
+	 		console.log(params)
+	 		delete params.customerPhoneNo; 		
+	 		Order.find(params, function(err, orders) {
+	 			if (err) {
+	 				console.log(err)
+	 				return res.json({err:"Order not found"})
+	 			}
+	 			// console.log(orders)
+				return res.view("order/search",{
+					partials: {
+						head: '../partials/head',
+						tail: '../partials/tail',
+					},
+					title:"Search Order",
+					orders:orders,
+					user:req.session.user
+				});
+	 		});
  		});
+
  	},
 };
 
