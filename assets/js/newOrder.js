@@ -25,13 +25,14 @@ $(document).ready(function () {
                 var totalPrice = response.totalPrice; // Total price of ALL objects
                 
                 nOrders.forEach(function(e) {
-
+                    var createdAt = new Date(e.createdAt);
+                    createdAt = createdAt.toUTCString();
                     $('#orderTable > table > tbody').append('<tr class="cursor-pointer">' + 
                                                     '<td>'+e.id+'</td>' + 
                                                     '<td>'+e.method+'</td>' + 
                                                     '<td>'+e.deliveryAddr+'</td>' + 
                                                     '<td>'+e.priceSum+'</td>' + 
-                                                    '<td>'+e.createdAt+'</td>' + 
+                                                    '<td>'+createdAt+'</td>' + 
                                                     '</tr>'
                                                    ).hide().fadeIn('fast');
                 });
