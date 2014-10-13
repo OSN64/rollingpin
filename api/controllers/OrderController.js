@@ -100,11 +100,23 @@
  			}
  			if (err || isEmpty(orderItems)) {
  				console.log(err)
- 				return res.redirect('/orderstart');
+ 				console.log("Empty order " + ordId)
+ 				console.log("Del order")
+
+ 				Order.findOne({id:ordId}, function(err, order) {
+					if (err || !order) return res.redirect('/orderstart');
+					console.log(order)
+					Order.destroy(ordId, function(err) {
+ 						return res.redirect('/orderstart');
+					});
+				});
+
+
  			}
  			Order.findOne({id:ordId}, function(err, sOrder) {
  				if (err) console.log(err);
-
+ 				console.log(sOrder)
+ 				if (typeof sOrder === 'undefined' )	return res.redirect('/orderstart');
  				// console.log(sOrder)
  				Customer.findOne({id:parseInt(sOrder.customerId)}, function(err, customer) {
  					if (err) console.log(err);
