@@ -18,7 +18,7 @@
     "debug": "node debug app.js"
   },
   "main": "app.js",
-  "repository": "",
+  "repository": "https://github.com/OSN64/rollingpin",
   "author": "",
   "license": ""
 }
