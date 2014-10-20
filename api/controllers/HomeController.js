@@ -17,15 +17,33 @@
 
  module.exports = {
  	index: function(req, res) {
- 		res.view("home/index",{
- 			partials: {
- 				head: '../partials/head',
- 				tail: '../partials/tail',
- 			},
- 			title:"Home",
- 			user: req.session.user
+ 		var midnight = new Date();
+ 		midnight.setHours(0,0,0,0) // set date instance to midnight today
+ 		console.log("midnight: " + midnight)
+ 		// var fOQuery = Order.
+ 		var fOQuery = Order.find("").where({"createdAt": { '>=': midnight,'<=' : new Date()}});
+ 		fOQuery.exec(function (err,orders){
+ 			if (err) {
+ 				console.log(err)
+ 				return ;
+ 			}
+ 			console.log(orders)
+ 			var totalPrice = 0;	
+ 			for(var i=0, j=orders.length; i<j; i++) {
+ 				if (orders[i].priceSum !== undefined && orders[i].paid == true) {
+ 					totalPrice += orders[i].priceSum;
+ 				};
+ 			}
+ 			res.view("home/index",{
+ 				partials: {
+ 					head: '../partials/head',
+ 					tail: '../partials/tail',
+ 				},
+ 				title:"Home",
+ 				user: req.session.user,
+ 				totalPrice:totalPrice,
+ 			});
  		});
-		// res.json({name: "dave" , person: 3});
  	},
 
   /**
